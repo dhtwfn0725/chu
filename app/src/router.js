@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Index from './views/Index'
+import Details from './views/Details.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -27,5 +29,6 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: Index
     },
+    {path:"/details",component:Details}
   ]
 })
