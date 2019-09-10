@@ -2,13 +2,14 @@
   <div class="index">
     <div class="top-logo">
       <div class="logo">
-        <img src alt />
+        <img src="/images/logo.svg" alt />
       </div>
       <div class="title">
         <h2>楚游</h2>
       </div>
       <p class="text">说走就走，就上楚游</p>
     </div>
+
     <div class="login-btn">
       <span class="iconfont icon-denglu"></span>
       <mt-button class="btn" type="primary" size="large">马上登录</mt-button>
@@ -29,6 +30,17 @@
 .index {
   height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  text-align: center;
+  padding-top: 1.266667rem;
+}
+.logo img {
+  width: 2.333333rem;
 }
 .title h2 {
   text-align: center;
@@ -41,24 +53,25 @@
 }
 
 .login-btn {
-  position: absolute;
+  position: fixed;
   bottom: 5.493333rem;
   width: 100%;
   text-align: center;
 }
 .reg-btn {
-  position: absolute;
+  position: fixed;
   bottom: 3.466667rem;
   width: 100%;
   text-align: center;
 }
-.reg-btn >span ,.login-btn >span {
-    position: absolute;
-    left: 1.973333rem;
-    top: .35rem;
-    font-size: 20px;
-    color:#fff;
-    z-index: 1;
+.reg-btn > span,
+.login-btn > span {
+  position: absolute;
+  left: 1.973333rem;
+  top: 0.35rem;
+  font-size: 20px;
+  color: #fff;
+  z-index: 1;
 }
 .btn {
   display: block;
