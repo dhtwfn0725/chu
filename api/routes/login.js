@@ -2,8 +2,9 @@ const express = require('express');
 const pool = require('../pool');
 const router=express.Router();
 
+
 // 登录路由
-router.post("/login", (req, res) => {
+router.get("/login", (req, res) => {
     var uname = req.query.uname;
     var upwd = req.query.upwd;
     console.log(uname);
