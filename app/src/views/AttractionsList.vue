@@ -1,74 +1,181 @@
 <template>
-  <div class="container">
-    <div class="jdlist">
-        <h1>说走就走的旅行</h1>
-        <mt-swipe :show-indicators="false" :auto="0">
-        <mt-swipe-item>
-            <div>
-                <img src="../../public/images/lswjs_01.jpg">
+    <div class="container">
+        <div class="header_top">
+            <span>类别</span>
+            <select name="" id="" class="my_select">
+                <option value="">美国</option>
+                <option value="">美国</option>
+                <option value="">美国</option>
+            </select>
+        </div>
+        <div class="input_search">
+            <img src="../../public/images/search.png">
+            <input type="text" placeholder="搜索目的地">
+        </div>
+        <div class="list_body">
+            <div class="img_list" v-for="(item,index) in datas.data" :key="index">
+                <div class="evaluation">
+                    <mt-badge color="rgb(228, 105, 135)" size="large">{{item.ecount}}</mt-badge>
+                </div>
+                <img :src="require(`../../public/images/jjs.jpg`)">
+                <div class="img_msg">
+                    <p>{{item.city}}</p>
+                    <p>{{item.count}}家酒店可用</p>
+                    <div class="tx_img">
+                        <img src="../../public/images/r1.gif">
+                        <div>+{{item.ucount}}</div>
+                        <span>参观了这个城市</span>
+                    </div>
+                    
+                </div>
             </div>
-        </mt-swipe-item>
-        <mt-swipe-item>
-            <div>
-                <img src="../../public/images/lswjs_02.jpg">
-            </div>
-        </mt-swipe-item>
-        <mt-swipe-item>
-            <div>
-                <img src="../../public/images/lswjs_03.jpg">
-            </div>
-        </mt-swipe-item>
-        </mt-swipe>
+        </div>
+        <!-- <div class="att_foot">
+            <mt-tabbar v-model="selected" fixed>
+                <mt-tab-item id="home">
+                    <img slot="icon" src="../../public/images/home.png">
+                </mt-tab-item>
+                <mt-tab-item id="collect">
+                    <img slot="icon" src="../../public/images/collection.png">
+                </mt-tab-item>
+                <mt-tab-item id="details">
+                    <img slot="icon" src="../../public/images/xxfl.png">
+                </mt-tab-item>
+                <mt-tab-item id="mine">
+                    <img slot="icon" src="../../public/images/mine.png">
+                </mt-tab-item>
+            </mt-tabbar>
+        </div> -->
     </div>
-    <div class="attlist_body">
-        <h1>拉斯维加斯</h1>
-    </div>
-    <div class="attlist_foot">
-        <div><img src="../../public/images/lswjs_01.jpg"></div>
-        <div><img src="../../public/images/lswjs_02.jpg"></div>
-        <div><img src="../../public/images/lswjs_03.jpg"></div>
-    </div>
-    <mt-button type="primary" size="large">酒店列表</mt-button>
-  </div>
 </template>
 <script>
-export default {};
+import attlist from '../assets/json/attlist.json'
+    export default {
+        data() {
+            return {
+                datas:attlist,
+            }
+        },
+        component:{
+
+        }
+    };
 </script>
-<style scoped>
-    .container{
-        background-color: white;
-    }
-    .mint-swipe img{
-        width: 75%;
-        border: 1px solid transparent;
-        border-radius: .3125rem;
-    }
-    .jdlist{
-        height: 7.5rem;
-        text-align: center;
-    }
-    .jdlist>h1{
-        display: inline-block;
-        margin-right: 30%;
-    }
-    .attlist_body>h1:nth-child(1){
-        text-align: center;
-    }
-    .attlist_foot img{
-        width: 2.8125rem;
-        border: 1px solid transparent;
-        border-radius: .3125rem;
-        box-sizing: border-box;
-    }
-    .attlist_foot{
-        display: flex;
-        justify-content: space-between;
-        margin: 5% 6% 5% 6%;
-    }
-    .mint-button{
-        margin: .625rem auto;
-        height: 1.5625rem;
-        border-radius: .625rem;
-        width: 8.75rem
-    }
+<style scoped="scoped">
+/* 整体样式 */
+.container {
+    background-color: #f0f8ff1a;
+    padding-top: 0.2rem;
+    margin-bottom: 2.666667rem;
+    
+}
+
+/* 顶部样式 */
+.header_top {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0.533333rem;
+    padding-left: 0.533333rem;
+}
+
+.header_top > span {
+    padding-top: 0.133333rem;
+}
+.mint-header {
+    background-color: transparent;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.my_select {
+    border: 1px solid #0069ff94;
+    border-radius: 0.266667rem;
+    color: #0069ff;
+    font: bold;
+    padding: 0.133333rem 0.666667rem;
+}
+
+/* 搜索样式 */
+.input_search {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+.input_search input {
+    padding-left: 0.666667rem;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border: 1px solid #ccc;
+    border-radius: 0.266667rem;
+    width: 8.133333rem;
+}
+.input_search img {
+    position: relative;
+    left: 0.666667rem;
+    top: 0.133333rem;
+    width: 0.533333rem;
+}
+
+/* 评价徽章样式 */
+.evaluation{
+    position: relative;
+    top: 1.033333rem;
+    left: 3.733333rem;
+}
+
+/* 图片等相关样式 */
+.img_list{
+    margin-top: .666667rem;
+    text-align: center;
+    height: 6.666667rem;
+}
+.img_list img{
+    width: 9.066667rem;
+    border-radius: 5%;
+}
+.img_msg{
+    position: relative;
+    top: -3.733333rem;
+    background: white;
+    opacity: 0.8;
+    width: 7rem;
+    border-radius: 5px;
+}
+.tx_img{
+    display: flex;
+    justify-content:left;
+    width: 100%;
+    padding-left: 10%;
+}
+.tx_img img{
+    width: 1.066667rem;
+    border-radius: 50%;
+    z-index: 2;
+}
+.tx_img div{
+    background: #2875ec;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    color: white;
+    z-index: 1;
+}
+.tx_img span:last-child{
+    color: #263f42ab;
+    padding-top: 10px;
+    font-weight:bolder;
+    padding-left: .133333rem;
+}
+.img_msg>p:nth-child(1){
+    font-weight:bolder;
+    font-size: 15px;
+}
+.img_msg>p:nth-child(2){
+    font-weight:bolder;
+    font-size: 10px;
+    color: #263f42ab;
+}
+.img_msg p{
+    text-align: left;
+    margin-left: .8rem;
+}
 </style>

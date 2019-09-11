@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const session = require('express-session');
-const pool = require('./pool');
+
+const loginRouter = require('./routes/login');
 
 // 创建服务器
 var server = express();
@@ -23,28 +24,7 @@ server.use(cors({
 //使用body-parser中间件
 server.use(bodyParser.urlencoded({extended: false}));
 
-// 配置静态资源目录 server.use(express.static("public")); 登录路由
-server.get("/login", (req, res) => {
-    var uname = req.query.uname;
-    var upwd = req.query.upwd;
-    console.log(uname);
-    console.log(upwd);
-    var sql = "SELECT id FROM c_user WHERE username=? AND password=?";
-    pool.query(sql, [
-        uname, upwd
-    ], (err, rs) => {
-        if (err) 
-            throw err;
-        if (rs.length == 0) {
-            res.send({code: -1, msg: "用户名或密码错误"});
-            console.log(rs);
-        } else {
-            var uid = rs[0].id;
-            req.session.uid = uid;
-            res.send({code: 1, msg: "登录成功"});
-            console.log(rs);
-        }
-        
-    });
-});
+// 配置静态资源目录 server.use(express.static("public"));
 
+// 测试
+server.use("/user",loginRouter);
