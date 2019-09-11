@@ -147,6 +147,7 @@ import attlist from '../assets/json/attlist.json'
 }
 .tx_img img{
     width: 1.066667rem;
+    height: 1.066667rem;
     border-radius: 50%;
     z-index: 2;
 }
