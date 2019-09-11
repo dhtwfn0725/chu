@@ -17,7 +17,7 @@
                 <div class="evaluation">
                     <mt-badge color="rgb(228, 105, 135)" size="large">{{item.ecount}}</mt-badge>
                 </div>
-                <img :src="require(`../../public/images/jjs.jpg`)">
+                <img :src="'http://127.0.0.1:8080/'+item.img">
                 <div class="img_msg">
                     <p>{{item.city}}</p>
                     <p>{{item.count}}家酒店可用</p>
@@ -30,7 +30,8 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="att_foot">
+        <div style="width:100%;height:50px;"></div>
+        <div class="att_foot">
             <mt-tabbar v-model="selected" fixed>
                 <mt-tab-item id="home">
                     <img slot="icon" src="../../public/images/home.png">
@@ -45,7 +46,7 @@
                     <img slot="icon" src="../../public/images/mine.png">
                 </mt-tab-item>
             </mt-tabbar>
-        </div> -->
+        </div>
     </div>
 </template>
 <script>
@@ -54,10 +55,8 @@ import attlist from '../assets/json/attlist.json'
         data() {
             return {
                 datas:attlist,
+                selected:""
             }
-        },
-        component:{
-
         }
     };
 </script>
@@ -67,6 +66,7 @@ import attlist from '../assets/json/attlist.json'
     background-color: #f0f8ff1a;
     padding-top: 0.2rem;
     margin-bottom: 2.666667rem;
+    overflow: hidden;
     
 }
 
@@ -92,6 +92,7 @@ import attlist from '../assets/json/attlist.json'
     color: #0069ff;
     font: bold;
     padding: 0.133333rem 0.666667rem;
+    background: transparent;
 }
 
 /* 搜索样式 */
