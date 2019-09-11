@@ -1,20 +1,20 @@
 <template>
     <div id="detail">
-        <div id="main">
-            <mt-header>
-                <router-link to="/" slot="left">
-                    <mt-button icon="back"></mt-button>
-                </router-link>
-            </mt-header>
+        <div id="main" class="main">
             <div class="top-title">
                 <h1>凤凰古城</h1>
                 <p class="">21,113家酒店可用</p>
             </div>
-            <div>
-                
+            <div class="mid-style">
+                <div class="mid_praise">
+                    <div><img src="../../public/images/r1.gif" alt="" style="width:100%;border-radius:50%;"></div>
+                    <div><img src="../../public/images/r2.jpg" alt="" style="width:100%;border-radius:50%;"></div>
+                    <div>+12</div>
+                    <span>参观了这个城市</span>
+                </div>
             </div>
             <div class="top-img">
-                
+                <img src="../../public/images/h2.jpg" alt="">
             </div>
             <div class="mid-title">
                 <span>位于湖南省湘西土家族苗族自治州的西南部，由苗族、汉族、土家族等28个民族组成</span>
@@ -22,6 +22,9 @@
             </div>
             <button class="btn">酒店列表</button>
         </div> 
+        <div>
+            <span class="fiexd_txt">9.2</span>
+        </div>
     </div>
 </template>
 <script>
@@ -30,36 +33,76 @@ export default {
 }
 </script>
 <style scoped>
+    #detail{
+        background-color:#ebecec !important;
+    }
     #main{
-        text-align: center;
-        background-color:#fdf8f8 !important;
+        height:100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-bottom: 1.15rem;
     }
     .top-title{
-        width:2.666667rem;
-        background-color: white;
+        margin-top: 1rem;
+    }
+    .mid-style{
+        width:100%;
+        height:2rem;
+        text-align: center;
+    }
+    .mid_praise{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        width:60%;height:90%;
+        border-top: 1px solid #d0cccc;
+        text-align: center;
+        align-items: center;
         margin: 0 auto;
     }
+    .mid_praise>div{
+        width: 45px;height:45px;
+        border-radius: 50%;
+        margin-top: 0.2rem;
+    }
+    .mid_praise>:nth-child(3){
+        border-radius: 50%;
+        background-color: #4e74d8;
+        color: white;
+        text-align: center;
+        line-height: 350%;
+        font-weight: 600;
+    }
+    .mid_praise>span{
+        margin-top:10px;
+    }
     .top-img{
+        width:75%;
         margin: 0 auto;
-        width: 80%;height:6.666667rem;
-        background: url(../../public/images/h1.jpg);
+    }
+    .top-img>img{
+        width: 100%;height:100%;
         border-radius:.306667rem; 
     }
     .mid-title{
         width:85%;
         height:5rem;
-        margin: 0 auto;
         background: #fff;
-        align-items: center;
         font-size: 12px;
-}
+        border-radius:.306667rem; 
+        text-align: center;
+    }
     .mid-title>span{
         display: inline-block;
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
         margin-top: .666667rem;
     }
     .btn{
         font-size: 20px;
-        margin-top:-1rem;
+        margin-top:-0.5rem;
         width:80%;
         padding-top: 0.4rem ;
         padding-bottom: 0.4rem;
@@ -67,5 +110,16 @@ export default {
         background-color: #4e74d8;
         color:white;
         border:0;   
+     }
+     #detail>:nth-child(2){
+         width: .7rem;
+         padding: 10px 12px;
+         background-color: hotpink;
+         border-radius: 31px;
+         text-align: center;
+         position: fixed;
+         top:6.266667rem;left: 8rem ;
+         color: white;
+         font-weight: 600;
      }
 </style>
