@@ -9,6 +9,8 @@ const pool = require("../pool")
 router.get("/", (req, res) => {
     var city = req.query.city;
     var page = req.query.page;
+    console.log(city);
+    
     if (city === undefined) city = '武汉';
 
     var sql1 = `select id from c_city where city_name = ? limit 1`;

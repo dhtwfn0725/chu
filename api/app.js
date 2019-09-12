@@ -9,6 +9,8 @@ const loginRouter = require('./routes/login');
 // 景点列表
 
 const spotList = require('./routes/spotlist');
+const spotdetail = require('./routes/spotdetail');
+const search = require('./routes/search');
 
 // 创建服务器
 var server = express();
@@ -33,4 +35,6 @@ server.use(bodyParser.urlencoded({extended: false}));
 // 测试
 server.use("/user",loginRouter);
 server.use("/spotlist",spotList);
+server.use("/spotdetail",spotdetail);
+server.use("/search",search);
 
