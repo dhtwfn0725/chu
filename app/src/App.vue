@@ -5,7 +5,7 @@
 </template>
 
 <style>
-    input,select,textarea {
+    input,select,textarea,option {
       outline: none 0;
     }
     #app {

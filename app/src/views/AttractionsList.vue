@@ -32,32 +32,21 @@
         </div>
         <div style="width:100%;height:50px;"></div>
         <div class="att_foot">
-            <mt-tabbar v-model="selected" fixed>
-                <mt-tab-item id="home">
-                    <img slot="icon" src="../../public/images/home.png">
-                </mt-tab-item>
-                <mt-tab-item id="collect">
-                    <img slot="icon" src="../../public/images/collection.png">
-                </mt-tab-item>
-                <mt-tab-item id="details">
-                    <img slot="icon" src="../../public/images/xxfl.png">
-                </mt-tab-item>
-                <mt-tab-item id="mine">
-                    <img slot="icon" src="../../public/images/mine.png">
-                </mt-tab-item>
-            </mt-tabbar>
+            <bottom-bar></bottom-bar>
         </div>
     </div>
 </template>
 <script>
 import attlist from '../assets/json/attlist.json'
+import BottomBar from "@/components/BottomBar.vue";
     export default {
         data() {
             return {
                 datas:attlist,
                 selected:""
             }
-        }
+        },
+        components:{BottomBar}
     };
 </script>
 <style scoped="scoped">
