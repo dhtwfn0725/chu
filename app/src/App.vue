@@ -5,6 +5,9 @@
 </template>
 
 <style>
+    input,select,textarea {
+      outline: none 0;
+    }
     #app {
       background-color: #fafafa;
       font: 12px/1.5 '微软雅黑';
