@@ -3,10 +3,7 @@
     
     <h1 class="title">楚游，说走就走的旅行</h1>
     <div class="search">
-      <span class="iconfont iconsousuo">
-  
-      </span>
-      <input type="text" placeholder="搜索目的地" />
+      <search></search>
     </div>
     <div class="slider">
       <slider></slider>
@@ -29,7 +26,7 @@
   padding: 0.72rem 0;
   padding-left: 0.4rem;
 }
-.main-item .search {
+/* .main-item .search {
   position: relative;
   width: 8.906667rem;
   height: 1.44rem;
@@ -58,7 +55,7 @@
   height: 100%;
   width: 100%;
   font-size: 0.426667rem;
-}
+} */
 .hot-title {
   width: 8.853333rem;
   margin: 0 auto;
@@ -72,15 +69,19 @@
 .card-list {
   width: 8.933333rem;
   margin: 0 auto;
+  margin-bottom: 1.6rem;
 }
 </style>
 <script>
 import Slider from "@/components/Slider.vue";
 import CardItem from "@/components/CardItem.vue";
+import Search from "@/components/Search.vue";
+
 export default {
   components: {
     Slider,
-    CardItem
+    CardItem,
+    Search
   }
 };
 </script>

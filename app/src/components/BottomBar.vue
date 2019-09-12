@@ -3,28 +3,12 @@
     <div class="add">
       <span>+</span>
     </div>
-    <mt-tabbar v-model="selected" fixed>
-      <router-link to="/">
-        <mt-tab-item id="home">
-          <img slot="icon" src="/images/home.png" />
-        </mt-tab-item>
-      </router-link>
-      <router-link to="/collect">
-        <mt-tab-item id="collect">
-          <img slot="icon" src="/images/collection.png" />
-        </mt-tab-item>
-      </router-link>
-      <router-link to="/details">
-        <mt-tab-item id="details">
-          <img slot="icon" src="/images/xxfl.png" />
-        </mt-tab-item>
-      </router-link>
-      <router-link to="/mine">
-        <mt-tab-item id="mine">
-          <img slot="icon" src="/images/mine.png" />
-        </mt-tab-item>
-      </router-link>
-    </mt-tabbar>
+    <van-tabbar route>
+      <van-tabbar-item to="/" icon="shop">首页</van-tabbar-item>
+      <van-tabbar-item to="/attlist" icon="like">收藏</van-tabbar-item>
+      <van-tabbar-item to="/home" icon="point-gift">图集</van-tabbar-item>
+      <van-tabbar-item to="/mine" icon="manager">我的</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 <style scoped>
@@ -51,7 +35,7 @@
   align-items: center;
 }
 
-.bottom-bar .mint-tabbar >a {
+.bottom-bar .mint-tabbar > a {
   display: block;
   width: 25%;
   height: 100%;
@@ -63,9 +47,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
-
 </style>
 <script>
 import { log } from "util";
