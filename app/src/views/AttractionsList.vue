@@ -92,7 +92,7 @@ import attlist from '../assets/json/attlist.json'
     color: #0069ff;
     font: bold;
     padding: 0.133333rem 0.666667rem;
-    background: transparent;
+    background-color: transparent;
 }
 
 /* 搜索样式 */
