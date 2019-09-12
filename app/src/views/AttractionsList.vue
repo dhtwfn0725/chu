@@ -17,7 +17,7 @@
                 <div class="evaluation">
                     <mt-badge color="rgb(228, 105, 135)" size="large">{{item.ecount}}</mt-badge>
                 </div>
-                <img :src="require(`../../public/images/jjs.jpg`)">
+                <img :src="'http://127.0.0.1:8080/'+item.img">
                 <div class="img_msg">
                     <p>{{item.city}}</p>
                     <p>{{item.count}}家酒店可用</p>
@@ -92,6 +92,7 @@ import attlist from '../assets/json/attlist.json'
     color: #0069ff;
     font: bold;
     padding: 0.133333rem 0.666667rem;
+    background-color: transparent;
 }
 
 /* 搜索样式 */
