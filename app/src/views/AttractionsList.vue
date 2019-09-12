@@ -30,7 +30,8 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="att_foot">
+        <div style="width:100%;height:50px;"></div>
+        <div class="att_foot">
             <mt-tabbar v-model="selected" fixed>
                 <mt-tab-item id="home">
                     <img slot="icon" src="../../public/images/home.png">
@@ -45,7 +46,7 @@
                     <img slot="icon" src="../../public/images/mine.png">
                 </mt-tab-item>
             </mt-tabbar>
-        </div> -->
+        </div>
     </div>
 </template>
 <script>
@@ -54,10 +55,8 @@ import attlist from '../assets/json/attlist.json'
         data() {
             return {
                 datas:attlist,
+                selected:""
             }
-        },
-        component:{
-
         }
     };
 </script>
@@ -67,6 +66,7 @@ import attlist from '../assets/json/attlist.json'
     background-color: #f0f8ff1a;
     padding-top: 0.2rem;
     margin-bottom: 2.666667rem;
+    overflow: hidden;
     
 }
 
