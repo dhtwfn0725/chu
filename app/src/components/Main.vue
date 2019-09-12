@@ -16,13 +16,7 @@
       <span class="more">查看所有</span>
     </div>
     <div class="card-list">
-      <div class="card-item"></div>
-      <div class="card-item"></div>
-      <div class="card-item"></div>
-      <div class="card-item"></div>
-      <div class="card-item"></div>
-      <div class="card-item"></div>
-      <div class="card-item"></div>
+        <card-item v-for="i in 10" :key="i"></card-item>
     </div>
   </div>
 </template>
@@ -79,18 +73,14 @@
   width: 8.933333rem;
   margin: 0 auto;
 }
-.card-item {
-  width: 8.933333rem;
-  height: 5.333333rem;
-  background-color: pink;
-  margin-bottom: 0.533333rem;
-}
 </style>
 <script>
 import Slider from "@/components/Slider.vue";
+import CardItem from "@/components/CardItem.vue";
 export default {
   components: {
-    Slider
+    Slider,
+    CardItem
   }
 };
 </script>
