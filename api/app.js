@@ -6,9 +6,13 @@ const session = require('express-session');
 
 const loginRouter = require('./routes/login');
 
+// 景点列表
+
+const spotList = require('./routes/spotlist');
+
 // 创建服务器
 var server = express();
-server.listen(8080);
+server.listen(8081);
 
 // 将session加密
 server.use(session({secret: "128位字符串", resave: true, saveUninitialized: true}));
@@ -28,3 +32,5 @@ server.use(bodyParser.urlencoded({extended: false}));
 
 // 测试
 server.use("/user",loginRouter);
+server.use("/spotlist",spotList);
+
