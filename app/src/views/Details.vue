@@ -7,14 +7,14 @@
             </div>
             <div class="mid-style">
                 <div class="mid_praise">
-                    <div><img src="../../public/images/r1.gif" alt="" style="width:100%;border-radius:50%;"></div>
-                    <div><img src="../../public/images/r2.jpg" alt="" style="width:100%;border-radius:50%;"></div>
+                    <div><img src="/images/r1.gif" alt="" style="width:100%;border-radius:50%;"></div>
+                    <div><img src="/images/r2.jpg" alt="" style="width:100%;border-radius:50%;"></div>
                     <div>+12</div>
                     <span>参观了这个城市</span>
                 </div>
             </div>
             <div class="top-img">
-                <img src="../../public/images/h2.jpg" alt="">
+                <img src="/images/h2.jpg" alt="">
             </div>
             <div class="mid-title">
                 <span>位于湖南省湘西土家族苗族自治州的西南部，由苗族、汉族、土家族等28个民族组成</span>
