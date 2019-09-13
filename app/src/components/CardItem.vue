@@ -1,25 +1,39 @@
 <template>
     <div class="card-item">
         <div class="img">
-            <img src="images/jjs.jpg" alt="">
+            <img :src="imgurl">
         </div>
         <div class="info">
-            <div class="title">旧金山</div> 
-            <div class="desc">改成城市景点介绍。。。</div>
+            <div class="title">{{city}}</div> 
+            <div class="desc">{{count}}家酒店</div>
             <div class="person">
                 <img src="images/r1.gif">
-                <span>+8</span>
+                <span>+{{ucount}}</span>
+                <span>参观了这个城市</span>
             </div>   
         </div>
         <div class="eval">
-            <span>90</span>
+            <span>{{ecount}}</span>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-
+    props:{
+        // 接收父元素数据
+        imgurl:{default:""},
+        title:{default:""},
+        city:{default:""},
+        count:{default:""},
+        ucount:{default:""},
+        ecount:{default:""}
+    },
+    data() {
+        return {
+            
+        }
+    },
 }
 </script>
 <style scoped>
@@ -57,23 +71,29 @@ export default {
     }
     .card-item .info .desc {
         font-size: 12px;
-        color:#939dab;
+        color:#7d7e80;
     }
     .card-item .info .person {
         margin-top: .133333rem;
         display: flex;
         align-items: center;
     }
-    .card-item .info .person >img,.card-item .info .person >span {
+    .card-item .info .person >img,.card-item .info .person >span:nth-child(2) {
         width: .906667rem;
         height: .906667rem;
         border-radius: 50%
     }
-    .card-item .info .person >span {
+    .card-item .info .person >span:nth-child(2) {
         background-color: #5680fa;
         text-align: center;
         color:#fff;
         line-height:.906667rem ;
+    }
+    .card-item .info .person >span:last-child{
+        font-size: 15px;
+        color:#7d7e80;
+        padding-left: .133333rem;
+        font:bolder;
     }
     .eval {
         position: absolute;

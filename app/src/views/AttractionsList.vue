@@ -10,7 +10,13 @@
         </div>
         <search></search>
         <div class="list_body">
-            <card-item v-for="i in 10" :key="i"></card-item>
+            <card-item v-for="(item,index) of datas.data" :key="index"
+            :imgurl="item.img"
+            :title="item.title"
+            :city="item.city"
+            :count="item.count"
+            :ucount="item.ucount"
+            :ecount="item.ecount"></card-item>
         </div>
         <div style="width:100%;height:50px;"></div>
         <div class="att_foot">
@@ -30,7 +36,14 @@ import Search from "@/components/Search.vue";
                 selected:""
             }
         },
-        components:{BottomBar,CardItem,Search}
+        components:{BottomBar,CardItem,Search},
+        // created() {
+        //     for(var item of this.datas.data){
+                
+        //     }
+        //     console.log(item);
+        //     console.log(item.uImg);
+        // },
     };
 </script>
 <style scoped="scoped">

@@ -13,7 +13,13 @@
       <span class="more">查看所有</span>
     </div>
     <div class="card-list">
-        <card-item v-for="i in 10" :key="i"></card-item>
+        <card-item v-for="(item,index) of datas.data" :key="index"
+            :imgurl="item.img"
+            :title="item.title"
+            :city="item.city"
+            :count="item.count"
+            :ucount="item.ucount"
+            :ecount="item.ecount"></card-item>
     </div>
   </div>
 </template>
@@ -76,12 +82,18 @@
 import Slider from "@/components/Slider.vue";
 import CardItem from "@/components/CardItem.vue";
 import Search from "@/components/Search.vue";
+import attlist from '../assets/json/attlist.json'
 
 export default {
   components: {
     Slider,
     CardItem,
     Search
-  }
+  },
+  data() {
+    return {
+      datas:attlist
+    }
+  },
 };
 </script>
