@@ -13,6 +13,7 @@
 
 import MainItem from "@/components/Main.vue";
 import BottomBar from "@/components/BottomBar.vue";
+import { log } from "util";
 
 export default {
   name: "home",
@@ -22,9 +23,18 @@ export default {
   },
   data() {
     return {
-      
+      testData:[]
     };
   },
-  methods: {}
+  methods: {
+    test() {
+      this.axios.get('/spotlist?city=武汉&page=1').then(response => {
+        this.testData = response;
+      });
+    }
+  },
+  created() {
+    this.test();
+  }
 };
 </script>
