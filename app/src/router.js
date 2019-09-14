@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Index from './views/Index'
 import AttList from './views/AttractionsList.vue'
 import Details from './views/Details.vue'
+import My from './views/My.vue'
 
 
 Vue.use(Router)
@@ -35,7 +36,8 @@ export default new Router({
       path:'/attlist',
       component:AttList
     },
-    {path:"/details",component:Details}
+    {path:"/details",component:Details},
+    {path:"/my",component:My},
     
   ]
 })
