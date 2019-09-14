@@ -11,6 +11,7 @@ const loginRouter = require('./routes/login');
 const spotList = require('./routes/spotlist');
 const spotdetail = require('./routes/spotdetail');
 const search = require('./routes/search');
+const my = require('./routes/my');
 
 // 创建服务器
 var server = express();
@@ -37,4 +38,5 @@ server.use("/user",loginRouter);
 server.use("/spotlist",spotList);
 server.use("/spotdetail",spotdetail);
 server.use("/search",search);
+server.use("/my",my);
 

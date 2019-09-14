@@ -2,10 +2,8 @@ const express = require("express")
 const router = express.Router();
 const pool = require("../pool")
 
-//app.use("/details",Details)
-//服务端接口地址http://localhost:3000/details
 //客户端请求时:
-//http://localhost:3000/details?lid=1
+//http://localhost:8081/spotlist?page=1&city=武汉
 router.get("/", (req, res) => {
     var city = req.query.city;
     var page = req.query.page;

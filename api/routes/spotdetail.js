@@ -2,10 +2,8 @@ const express = require("express")
 const router = express.Router();
 const pool = require("../pool")
 
-//app.use("/details",Details)
-//服务端接口地址http://localhost:3000/details
 //客户端请求时:
-//http://localhost:3000/details?lid=1
+//http://localhost:8081/spotdetail?id=2
 router.get("/", (req, res) => {
     var id = req.query.id;
     var sql1 = `select * from c_scenic_spot where id = ? limit 1`;
