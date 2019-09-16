@@ -1,38 +1,39 @@
 <template>
-  <div class="main-item">
-    
-    <h1 class="title">楚游，说走就走的旅行</h1>
-    <div class="search">
-      <search></search>
+    <div class="main-item">
+
+        <h1 class="title">楚游，说走就走的旅行</h1>
+        <div class="search">
+            <search></search>
+        </div>
+        <div class="slider">
+            <slider></slider>
+        </div>
+        <div class="hot-title">
+            <h2>热门景点</h2>
+            <router-link to="/attlist">
+              <span class="more">查看所有</span>
+            </router-link>
+            
+        </div>
+        <div class="card-list">
+            <card-item
+                v-for="(item,index) of datas"
+                :key="index"
+                :img="item.img"
+                :title="item.title"
+                :grade="item.grade"></card-item>
+        </div>
     </div>
-    <div class="slider">
-      <slider></slider>
-    </div>
-    <div class="hot-title">
-      <h2>热门景点</h2>
-      <span class="more">查看所有</span>
-    </div>
-    <div class="card-list">
-        <card-item v-for="(item,index) of datas.data" :key="index"
-            :imgurl="item.img"
-            :title="item.title"
-            :city="item.city"
-            :count="item.count"
-            :ucount="item.ucount"
-            :ecount="item.ecount"></card-item>
-    </div>
-  </div>
 </template>
-<style scoped>
-.main-item h1.title {
-  font-size: 0.64rem;
-  font-weight: 600;
-  line-height: 1;
-  margin: 0;
-  padding: 0.72rem 0;
-  padding-left: 0.4rem;
-}
-/* .main-item .search {
+<style scoped="scoped">
+    .main-item h1.title {
+        font-size: 0.64rem;
+        font-weight: 600;
+        line-height: 1;
+        margin: 0;
+        padding: 0.72rem 0 0.72rem 0.4rem;
+    }
+    /* .main-item .search {
   position: relative;
   width: 8.906667rem;
   height: 1.44rem;
@@ -62,38 +63,48 @@
   width: 100%;
   font-size: 0.426667rem;
 } */
-.hot-title {
-  width: 8.853333rem;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.hot-title .more {
-  color: #4a90e2;
-}
-.card-list {
-  width: 8.933333rem;
-  margin: 0 auto;
-  margin-bottom: 1.6rem;
-}
+    .hot-title {
+        width: 8.853333rem;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .hot-title .more {
+        color: #4a90e2;
+    }
+    .card-list {
+        width: 8.933333rem;
+        margin: 0 auto 1.6rem;
+    }
 </style>
 <script>
-import Slider from "@/components/Slider.vue";
-import CardItem from "@/components/CardItem.vue";
-import Search from "@/components/Search.vue";
-import attlist from '../assets/json/attlist.json'
+    import Slider from "@/components/Slider.vue";
+    import CardItem from "@/components/CardItem.vue";
+    import Search from "@/components/Search.vue";
+    // import attlist from '../assets/json/attlist.json'
 
-export default {
-  components: {
-    Slider,
-    CardItem,
-    Search
-  },
-  data() {
-    return {
-      datas:attlist
-    }
-  },
-};
+    export default {
+        components: {
+            Slider,
+            CardItem,
+            Search
+        },
+        data() {
+            return {datas: []}
+        },
+        methods: {
+            search() {
+                this
+                    .axios
+                    .get('/spotlist?city=武汉&page=1')
+                    .then(res => {
+                        this.datas = res;
+                    });
+            }
+        },
+        created() {
+            this.search();
+        }
+    };
 </script>

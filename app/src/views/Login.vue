@@ -8,15 +8,15 @@
       <div class="section">
         <div class="uname">
           <label>用户名</label>
-          <input type="text" placeholder="请填写用户名">
+          <input type="text" placeholder="请填写用户名" v-model="uname">
         </div>
         <div class="upwd">
           <label>密码</label>
-          <input type="password" placeholder="请填写密码">
+          <input type="password" placeholder="请填写密码" v-model="upwd">
           <span style="color:#83a0fa">忘记</span>
         </div>
         <div class="submit">
-          <span>登录</span>
+          <span @click="login">登录</span>
         </div>
       </div>
 
@@ -29,6 +29,50 @@
     </div>
   </div>
 </template>
+<script>
+import qs from 'qs'
+export default {
+  data() {
+    return {
+      uname:"",
+      upwd:""
+    }
+  },
+  methods: {
+    login(){
+      var $uname = this.uname;
+      var $upwd = this.upwd;
+      // console.log($uname);
+      // console.log($upwd);
+      var reg = /^[a-z0-9]{3,12}$/i;
+      if(!reg.test($uname)){
+        this.$toast("用户名格式不正确");
+        return;
+      }
+      if(!reg.test($upwd)){
+        this.$toast("密码格式不正确");
+        return;
+      }
+      this.axios.post("user/login",qs.stringify({
+        uname:this.uname,
+        upwd:this.upwd
+      })).then(rs=>{
+        // console.log(rs);
+        if(rs.code==1){
+          this.$router.push({path:"attlist"});
+        }
+        this.$toast(rs.msg);
+      }).catch(err=>{
+        throw err;
+      })
+
+    }
+  },
+  created() {
+    
+  },
+}
+</script>
 <style scoped>
 .login {
   display: flex;

@@ -1,19 +1,21 @@
 <template>
     <div class="card-item">
         <div class="img">
-            <img :src="imgurl">
+            <router-link to="details">
+                <img :src="img">
+            </router-link>
         </div>
         <div class="info">
-            <div class="title">{{city}}</div> 
-            <div class="desc">{{count}}家酒店</div>
+            <div class="title">{{title}}</div> 
+            <div class="desc">景点等级：{{grade}}级</div>
             <div class="person">
                 <img src="images/r1.gif">
-                <span>+{{ucount}}</span>
-                <span>参观了这个城市</span>
+                <span>+1</span>
+                <span>评论了该景点</span>
             </div>   
         </div>
-        <div class="eval">
-            <span>{{ecount}}</span>
+        <div class="eval" title="收藏量">
+            <span>20</span>
         </div>
     </div>
 </template>
@@ -22,12 +24,9 @@
 export default {
     props:{
         // 接收父元素数据
-        imgurl:{default:""},
+        img:{default:""},
         title:{default:""},
-        city:{default:""},
-        count:{default:""},
-        ucount:{default:""},
-        ecount:{default:""}
+        grade:{default:""}
     },
     data() {
         return {
@@ -48,7 +47,7 @@ export default {
         width: 100%;
         height: 100%;
     }
-    .card-item .img  >img {
+    .card-item .img  >a>img {
         width: 100%;
         height: 100%;
         border-radius: .266667rem;
