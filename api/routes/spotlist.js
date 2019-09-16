@@ -7,7 +7,7 @@ const pool = require("../pool")
 router.get("/", (req, res) => {
     var city = req.query.city;
     var page = req.query.page;
-    console.log(city);
+    // console.log(city);
     
     if (city === undefined) city = '武汉';
 
@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
                 console.log(err);
                 return;
             }
-            console.log(result);
+            // console.log(result);
             res.send(result);
         })
   })

@@ -30,7 +30,7 @@
     import Search from "@/components/Search.vue";
     export default {
         data() {
-            return {datas: [], selected: ""}
+            return {datas: []}
         },
         components: {
             BottomBar,

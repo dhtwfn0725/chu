@@ -4,9 +4,9 @@ const router=express.Router();
 
 
 // 登录路由
-router.get("/login", (req, res) => {
-    var uname = req.query.uname;
-    var upwd = req.query.upwd;
+router.post("/login", (req, res) => {
+    var uname = req.body.uname;
+    var upwd = req.body.upwd;
     // console.log(uname);
     // console.log(upwd);
     var sql = "SELECT * FROM c_user WHERE username=? AND password=?";
@@ -22,7 +22,7 @@ router.get("/login", (req, res) => {
             var uid = rs[0].id;
             req.session.uid = uid;
             res.send({code: 1, msg: "登录成功",data:rs[0]});
-            // console.log(rs);
+            console.log(rs);
         }
         
     });
