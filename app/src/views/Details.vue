@@ -3,28 +3,26 @@
         <div id="main" class="main">
             <div class="top-title">
                 <h1>凤凰古城</h1>
-                <p class="">21,113家酒店可用</p>
+                <p style="text-align: center;">景点等级:5A级</p>
             </div>
             <div class="mid-style">
                 <div class="mid_praise">
                     <div><img src="/images/r1.gif" alt="" style="width:100%;border-radius:50%;"></div>
                     <div><img src="/images/r2.jpg" alt="" style="width:100%;border-radius:50%;"></div>
-                    <div>+12</div>
-                    <span>参观了这个城市</span>
+                    <div>+520</div>
+                    <span>520人评论了该景点</span>
                 </div>
             </div>
             <div class="top-img">
                 <img src="/images/h2.jpg" alt="">
+                <span class="">9.2</span>
             </div>
             <div class="mid-title">
                 <span>位于湖南省湘西土家族苗族自治州的西南部，由苗族、汉族、土家族等28个民族组成</span>
                 <span>是中国西南文物建筑最多的县份。城内还有古色古香的石板街道200多条</span>
             </div>
-            <button class="btn">酒店列表</button>
+            <button class="btn">景点图集</button>
         </div> 
-        <div>
-            <span class="fiexd_txt">9.2</span>
-        </div>
     </div>
 </template>
 <script>
@@ -37,7 +35,6 @@ export default {
         background-color:#ebecec !important;
     }
     #main{
-        height:100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -80,10 +77,23 @@ export default {
     .top-img{
         width:75%;
         margin: 0 auto;
+        position: relative;
     }
     .top-img>img{
         width: 100%;height:100%;
         border-radius:.306667rem; 
+    }
+    .top-img>span{
+        width: .7rem;
+        padding: 10px 11px;
+        background-color: hotpink;
+        border-radius: 31px;
+        text-align: center;
+        color: white;
+        font-weight: 600;
+        position: absolute;
+        top:13%;
+        right: -7.5%;
     }
     .mid-title{
         width:85%;
@@ -111,7 +121,7 @@ export default {
         color:white;
         border:0;   
      }
-     #detail>:nth-child(2){
+     /* #detail>:nth-child(2){
          width: .7rem;
          padding: 10px 12px;
          background-color: hotpink;
@@ -121,5 +131,5 @@ export default {
          top:6.266667rem;left: 8rem ;
          color: white;
          font-weight: 600;
-     }
+     } */
 </style>
