@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Index from './views/Index'
 import AttList from './views/AttractionsList.vue'
 import Details from './views/Details.vue'
+import Details2 from './views/Details2.vue'
 import My from './views/My.vue'
 
 
