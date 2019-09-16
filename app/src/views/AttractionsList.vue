@@ -10,13 +10,12 @@
         </div>
         <search></search>
         <div class="list_body">
-            <card-item v-for="(item,index) of datas.data" :key="index"
-            :imgurl="item.img"
-            :title="item.title"
-            :city="item.city"
-            :count="item.count"
-            :ucount="item.ucount"
-            :ecount="item.ecount"></card-item>
+            <card-item
+                v-for="(item,index) of datas"
+                :key="index"
+                :img="item.img"
+                :title="item.title"
+                :grade="item.grade"></card-item>
         </div>
         <div style="width:100%;height:50px;"></div>
         <div class="att_foot">
@@ -25,58 +24,63 @@
     </div>
 </template>
 <script>
-import attlist from '../assets/json/attlist.json'
-import BottomBar from "@/components/BottomBar.vue";
-import CardItem from "@/components/CardItem.vue";
-import Search from "@/components/Search.vue";
+    // import attlist from '../assets/json/attlist.json'
+    import BottomBar from "@/components/BottomBar.vue";
+    import CardItem from "@/components/CardItem.vue";
+    import Search from "@/components/Search.vue";
     export default {
         data() {
-            return {
-                datas:attlist,
-                selected:""
+            return {datas: [], selected: ""}
+        },
+        components: {
+            BottomBar,
+            CardItem,
+            Search
+        },
+        methods: {
+            search() {
+                this
+                    .axios
+                    .get('/spotlist?city=武汉&page=1')
+                    .then(res => {
+                        this.datas = res;
+                    });
             }
         },
-        components:{BottomBar,CardItem,Search},
-        // created() {
-        //     for(var item of this.datas.data){
-                
-        //     }
-        //     console.log(item);
-        //     console.log(item.uImg);
-        // },
+        created() {
+            this.search();
+        }
     };
 </script>
 <style scoped="scoped">
-/* 整体样式 */
-.container {
-    background-color: #f0f8ff1a;
-    overflow: hidden;
-}
-/* 顶部样式 */
-.header_top {
-    margin-top: .266667rem;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 0.533333rem;
-    padding-left: 0.533333rem;
-}
+    /* 整体样式 */
+    .container {
+        background-color: #f0f8ff1a;
+        overflow: hidden;
+    }
+    /* 顶部样式 */
+    .header_top {
+        margin-top: 0.266667rem;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 0.533333rem;
+        padding-left: 0.533333rem;
+    }
 
-.header_top > span {
-    padding-top: 0.133333rem;
-}
-.mint-header {
-    background-color: transparent;
-    color: black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-.my_select {
-    border: 1px solid #0069ff94;
-    border-radius: 0.266667rem;
-    color: #0069ff;
-    font: bold;
-    padding: 0.133333rem 0.666667rem;
-    background-color: transparent;
-}
-
-
+    .header_top > span {
+        padding-top: 0.133333rem;
+    }
+    .mint-header {
+        background-color: transparent;
+        color: black;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    .my_select {
+        border: 1px solid #0069ff94;
+        border-radius: 0.266667rem;
+        color: #0069ff;
+        font: bold;
+        padding: 0.133333rem 0.666667rem;
+        background-color: transparent;
+    }
 </style>
