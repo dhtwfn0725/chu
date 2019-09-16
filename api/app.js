@@ -56,5 +56,5 @@ const storage = multer.diskStorage({
 });
 var upload = multer({ storage })
 server.post('/upload', upload.array('photos', 5), function (req, res, next) {
-    res.send({ code: 0, msg: '上传成功' });
+    res.send({ code: 0, msg: '上传成功' ,data:req.files});
 })
