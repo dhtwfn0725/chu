@@ -12,6 +12,8 @@ const spotList = require('./routes/spotlist');
 const spotdetail = require('./routes/spotdetail');
 const search = require('./routes/search');
 const my = require('./routes/my');
+const reg = require('./routes/reg');
+const imglist = require('./routes/imglist');
 
 // 创建服务器
 var server = express();
@@ -39,4 +41,6 @@ server.use("/spotlist",spotList);
 server.use("/spotdetail",spotdetail);
 server.use("/search",search);
 server.use("/my",my);
+server.use("/reg",reg);
+server.use("/imglist",imglist);
 

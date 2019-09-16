@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
     var uid =  req.session.uid;
     if(uid == undefined){
         res.send({code:-1,msg:'未登录'});
+        return;
     }
     //  获取当前用户图片数
     var sql1 = `select count(*) as pic_num from c_user_imgs where user_id = ${uid}`;
