@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div class="header_top">
-            <span>类别</span>
-            <select name="" id="" class="my_select">
+            <h2>景点列表</h2>
+            <!-- <select name="" id="" class="my_select">
                 <option value="">美国</option>
                 <option value="">美国</option>
                 <option value="">美国</option>
-            </select>
+            </select> -->
         </div>
-        <search></search>
+        <!-- <search></search> -->
         <div class="list_body">
             <card-item
                 v-for="(item,index) of datas"
@@ -75,12 +75,12 @@
         color: black;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
-    .my_select {
+    /* .my_select {
         border: 1px solid #0069ff94;
         border-radius: 0.266667rem;
         color: #0069ff;
         font: bold;
         padding: 0.133333rem 0.666667rem;
         background-color: transparent;
-    }
+    } */
 </style>

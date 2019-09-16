@@ -10,7 +10,10 @@
         </div>
         <div class="hot-title">
             <h2>热门景点</h2>
-            <span class="more">查看所有</span>
+            <router-link to="/attlist">
+              <span class="more">查看所有</span>
+            </router-link>
+            
         </div>
         <div class="card-list">
             <card-item

@@ -14,7 +14,7 @@
                 <span>评论了该景点</span>
             </div>   
         </div>
-        <div class="eval">
+        <div class="eval" title="收藏量">
             <span>20</span>
         </div>
     </div>
