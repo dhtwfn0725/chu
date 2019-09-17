@@ -93,12 +93,6 @@
         padding: 0.133333rem 0.666667rem;
         background-color: transparent;
     } */
-    .search{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding-right: .533333rem;
-    }
     .loadMore>button{
         width: 9.066667rem;
         margin: auto;

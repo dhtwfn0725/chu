@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
         if (rs.length != 0) {
             res.send({ code: -1, msg: '用户名已占用', data: [] });
         } else {
-            sql = `insert into c_user (username,password,avatar,nickname,createtime) values (?,?,'images/album1.png',?,'2019-09-17 12:12:12')`;
+            sql = `insert into c_user (username,password,avatar,nickname) values (?,?,'images/album1.png',?)`;
             pool.query(sql, [uname, upwd, uname], (err, result) => {
                 if (err)
                     throw err;
