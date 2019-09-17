@@ -2,12 +2,12 @@
     <div class="card-item">
         <div class="img">
             <router-link to="details">
-                <img :src="img">
+                <img :src="item.img">
             </router-link>
         </div>
         <div class="info">
-            <div class="title">{{title}}</div> 
-            <div class="desc">景点等级：{{grade}}级</div>
+            <div class="title">{{item.title}}</div> 
+            <div class="desc">景点等级：{{item.grade}}级</div>
             <div class="person">
                 <img src="images/r1.gif">
                 <span>+{{item.comment_num}}</span>

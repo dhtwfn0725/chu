@@ -19,9 +19,6 @@
           v-for="(item,index) of list"
           :item="item"
           :key="index"
-          :img="item.img"
-          :title="item.title"
-          :grade="item.grade"
         ></card-item>
       </van-list>
     </div>
