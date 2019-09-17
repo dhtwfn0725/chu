@@ -8,14 +8,13 @@
                 <option value="">美国</option>
             </select> -->
         </div>
-        <!-- <search></search> -->
+        <div class="search">
+            <search></search>
+        </div>
         <div class="list_body">
             <card-item
                 v-for="(item,index) of datas"
                 :key="index"
-                :img="item.img"
-                :title="item.title"
-                :grade="item.grade"
                 :item="item">
                 </card-item>
         </div>
@@ -94,4 +93,14 @@
         padding: 0.133333rem 0.666667rem;
         background-color: transparent;
     } */
+    .search{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-right: .533333rem;
+    }
+    .loadMore>button{
+        width: 9.066667rem;
+        margin: auto;
+    }
 </style>
