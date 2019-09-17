@@ -15,9 +15,14 @@
                 :key="index"
                 :img="item.img"
                 :title="item.title"
-                :grade="item.grade"></card-item>
+                :grade="item.grade"
+                :item="item">
+                </card-item>
         </div>
-        <div style="width:100%;height:50px;"></div>
+        <div class="loadMore">
+            <mt-button size="large" type="danger" @click="search">加载更多</mt-button>
+        </div>
+        <div style="width:100%;height:100px;"></div>
         <div class="att_foot">
             <bottom-bar></bottom-bar>
         </div>
@@ -30,7 +35,11 @@
     import Search from "@/components/Search.vue";
     export default {
         data() {
-            return {datas: []}
+            return {
+                datas: [],
+                page:0,
+                title:""
+            }
         },
         components: {
             BottomBar,
@@ -39,11 +48,13 @@
         },
         methods: {
             search() {
+                this.page++;
                 this
                     .axios
-                    .get('/spotlist?city=武汉&page=1')
-                    .then(res => {
-                        this.datas = res;
+                    .get(`/search?title=${this.title}&page=${this.page}`)
+                    .then(rs => {
+                        var rows = this.datas.concat(rs);
+                        this.datas = rows;
                     });
             }
         },
