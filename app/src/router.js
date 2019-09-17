@@ -7,6 +7,7 @@ import Details from './views/Details.vue'
 import My from './views/My.vue'
 import Collection from './views/Collection.vue'
 import MyAlbum from './views/MyAlbum.vue'
+import Register from './views/Reg.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,9 @@ export default new Router({
         }, {
             path: "/collection",
             component: Collection
+        }, {
+            path: "/reg",
+            component: Register
         }
 
     ]

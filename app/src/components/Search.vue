@@ -1,19 +1,38 @@
 <template>
   <div class="search">
     <div class="input_search">
-      <img src="../../public/images/search.png">
-      <input type="text" placeholder="搜索目的地">
+      <img src="images/search.png" @click="search">
+      <input type="text" v-model="keyword" placeholder="搜索景点名称">
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return {
+      keyword:''
+    }
+  },
+  methods:{
+    search(){
+      if(this.keyword == ''){
+        this.$toast('请输入景点名称关键字');
+        return;
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
 /* 搜索样式 */
+.search {
+  display: flex;
+  justify-content: space-around
+}
 .input_search {
+  position: relative;
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
 }
@@ -26,9 +45,9 @@ export default {};
   width: 8.133333rem;
 }
 .input_search img {
-  position: relative;
-  left: 0.666667rem;
-  top: 0.133333rem;
+  position: absolute;
+  right:  0.6rem;
+  top: 0.3rem;
   width: 0.533333rem;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <div class="top">
-      <h2>欢迎回来</h2>
-      <p>请在下方输入你的登录凭证</p>
+      <h2>欢迎注册</h2>
+      <p>请在下方输入你的注册信息</p>
     </div>
     <div class="form">
       <div class="section">
@@ -11,70 +11,75 @@
           <van-field v-model="upwd" type="password" label="密码" placeholder="请输入密码" required />
         </van-cell-group>
         <div class="submit">
-          <span @click="login">登 录</span>
+          <span @click="reg">注 册</span>
         </div>
       </div>
 
       <div class="bottom">
         <p>
-          没有账号吗？
-           <router-link to="/reg">
-          <span style="color:#83a0fa">立即注册</span>
-           </router-link>
+          已有账号，
+          <router-link to="/login">
+          <span style="color:#83a0fa">立即登录</span>
+          </router-link>
         </p>
       </div>
     </div>
   </div>
 </template>
 <script>
-import qs from 'qs'
+import qs from "qs";
 export default {
   data() {
     return {
-      uname:"",
-      upwd:""
-    }
+      uname: "",
+      upwd: ""
+    };
   },
   methods: {
-    login(){
+    reg() {
       var $uname = this.uname;
       var $upwd = this.upwd;
       // console.log($uname);
       // console.log($upwd);
       var reg = /^[a-z0-9]{3,12}$/i;
-      if(!reg.test($uname)){
+      if (!reg.test($uname)) {
         this.$toast("用户名格式不正确");
         return;
       }
-      if(!reg.test($upwd)){
+      if (!reg.test($upwd)) {
         this.$toast("密码格式不正确");
         return;
       }
-      this.axios.post("user/login",qs.stringify({
-        uname:this.uname,
-        upwd:this.upwd
-      })).then(rs=>{
-        // console.log(rs);
-        if(rs.code==1){
-          this.$router.push({path:"/"});
-        }
-        this.$toast(rs.msg);
-      }).catch(err=>{
-        throw err;
-      })
-
+      this.axios
+        .post(
+          "/reg",
+          qs.stringify({
+            uname: this.uname,
+            upwd: this.upwd
+          })
+        )
+        .then(rs => {
+          this.$toast(rs.msg);
+          if (rs.code == 0) {
+            this.$router.push({ path: "/login" });
+          } 
+        })
+        .catch(err => {
+          throw err;
+        });
     }
   },
-  created() {
-    
-  },
-}
+  created() {}
+};
 </script>
 <style scoped>
 .login {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+.top {
+  margin-top: 0.4rem;
 }
 .top > h2 {
   text-align: center;
