@@ -5,16 +5,12 @@
         <card-item
             v-for="(item,index) of datas"
             :key="index"
-            :img="item.img"
-            :title="item.title"
-            :grade="item.grade"
             :item="item"></card-item>
         <bottom-bar></bottom-bar>
     </div>
 </template>
 <script>
     import BottomBar from "@/components/BottomBar.vue";
-    import Collist from '@/components/Collist';
     import CardItem from "@/components/CardItem.vue";
 
     export default {
@@ -23,7 +19,6 @@
         },
         components: {
             BottomBar,
-            Collist,
             CardItem
         },
         methods: {
