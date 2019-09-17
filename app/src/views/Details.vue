@@ -8,7 +8,7 @@
             <span>位于湖南省湘西土家族苗族自治州的西南部，由苗族、汉族、土家族等28个民族组成</span>
             <span>是中国西南文物建筑最多的县份。城内还有古色古香的石板街道200多条</span>
           </div>
-          <button class="btn">景点图集</button>
+          <button class="btn">景点阅览</button>
         </div>
       </van-tab>
       <van-tab title="景点评论">
