@@ -4,12 +4,12 @@
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
-        <div class="swiper-slide" v-for="(item,index) of sliderList" :key="index">
+        <div class="swiper-slide" v-for="(item,index) of list" :key="index">
           <div class="img">
             <img :src="item.img" alt />
           </div>
           <div class="text">
-            <span v-text="item.title"></span>
+            <span v-text="item.city_name"></span>
           </div>
         </div>
       </div>
@@ -32,6 +32,11 @@
   align-items: center;
   justify-content: center;
   overflow: hidden; 
+  margin-right: .133333rem;
+}
+.swiper-slide .img {
+  width: 100%;
+  height: 100%;
 }
 .swiper-slide .img img {
   width: 100%;
@@ -50,21 +55,11 @@ import Swiper from "swiper";
 export default {
   data() {
     return {
-      sliderList: [
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" },
-        { title: "武汉", img: "/images/wh.jpg" }
-      ]
+       
     };
+  },
+  props:{
+    list:{default:Object}
   },
   mounted() {
     var mySwiper = new Swiper(".swiper-container", {

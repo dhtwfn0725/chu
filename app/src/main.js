@@ -9,6 +9,7 @@ import Mint from 'mint-ui';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import axios from 'axios'
+axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://127.0.0.1:8081';
 
 // 添加响应拦截器   

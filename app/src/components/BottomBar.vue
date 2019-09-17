@@ -5,8 +5,8 @@
     </div>
     <van-tabbar route>
       <van-tabbar-item to="/" icon="shop">首页</van-tabbar-item>
+      <van-tabbar-item to="/attlist" icon="point-gift">列表</van-tabbar-item>
       <van-tabbar-item to="/collection" icon="like">收藏</van-tabbar-item>
-      <van-tabbar-item to="/home" icon="point-gift">图集</van-tabbar-item>
       <van-tabbar-item to="/my" icon="manager">我的</van-tabbar-item>
     </van-tabbar>
   </div>

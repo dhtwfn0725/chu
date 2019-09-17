@@ -10,12 +10,12 @@
             <div class="desc">景点等级：{{grade}}级</div>
             <div class="person">
                 <img src="images/r1.gif">
-                <span>+1</span>
+                <span>+{{item.comment_num}}</span>
                 <span>评论了该景点</span>
             </div>   
         </div>
         <div class="eval" title="收藏量">
-            <span>20</span>
+            <span>{{item.collection_num}}</span>
         </div>
     </div>
 </template>
@@ -26,7 +26,8 @@ export default {
         // 接收父元素数据
         img:{default:""},
         title:{default:""},
-        grade:{default:""}
+        grade:{default:""},
+        item:{default:Object},
     },
     data() {
         return {

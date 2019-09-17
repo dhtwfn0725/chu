@@ -13,8 +13,9 @@ router.post("/login", (req, res) => {
     pool.query(sql, [
         uname, upwd
     ], (err, rs) => {
-        if (err) 
+        if (err) {
             throw err;
+        }
         if (rs.length == 0) {
             res.send({code: -1, msg: "用户名或密码错误"});
             // console.log(rs);
@@ -22,7 +23,7 @@ router.post("/login", (req, res) => {
             var uid = rs[0].id;
             req.session.uid = uid;
             res.send({code: 1, msg: "登录成功",data:rs[0]});
-            console.log(rs);
+            //console.log(rs);
         }
         
     });
