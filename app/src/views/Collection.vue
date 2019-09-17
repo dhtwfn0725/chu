@@ -7,7 +7,8 @@
             :key="index"
             :img="item.img"
             :title="item.title"
-            :grade="item.grade"></card-item>
+            :grade="item.grade"
+            :item="item"></card-item>
         <bottom-bar></bottom-bar>
     </div>
 </template>

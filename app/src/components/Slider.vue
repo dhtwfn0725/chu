@@ -26,7 +26,7 @@
 }
 .swiper-slide {
   position: relative;
-  width: 3.2rem;
+  width: 2.9rem;
   height: 2.133333rem;
   display: flex;
   align-items: center;

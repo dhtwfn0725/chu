@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     var pageSize = 5;
     var offset = (page-1) * pageSize;
     // console.log(page);
-    var sql = `select a.id,a.title,a.img,a.city_id,a.grade,b.user_id,b.spot_id from c_scenic_spot a left join c_collect b on a.id=b.spot_id where 
+    var sql = `select a.id,a.title,a.img,a.city_id,a.grade,a.comment_num,a.collection_num,b.user_id,b.spot_id from c_scenic_spot a left join c_collect b on a.id=b.spot_id where 
     b.user_id=?  limit ${offset},${pageSize}`;
     pool.query(sql,[uid],(err, result) => {
         if (err) throw err;
