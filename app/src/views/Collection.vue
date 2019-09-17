@@ -12,9 +12,9 @@
     </div>
 </template>
 <script>
-    import Search from "@/components/Search.vue";
     import BottomBar from "@/components/BottomBar.vue";
     import Collist from '@/components/Collist';
+    import CardItem from "@/components/CardItem.vue";
 
     export default {
         data() {
@@ -22,8 +22,8 @@
         },
         components: {
             BottomBar,
-            Search,
-            Collist
+            Collist,
+            CardItem
         },
         methods: {
             init() {

@@ -15,7 +15,9 @@
                 :key="index"
                 :img="item.img"
                 :title="item.title"
-                :grade="item.grade"></card-item>
+                :grade="item.grade"
+                :item="item">
+                </card-item>
         </div>
         <div class="loadMore">
             <mt-button size="large" type="danger" @click="search">加载更多</mt-button>

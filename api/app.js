@@ -7,7 +7,6 @@ const session = require('express-session');
 const loginRouter = require('./routes/login');
 
 // 景点列表
-
 const spotList = require('./routes/spotlist');
 const spotdetail = require('./routes/spotdetail');
 const search = require('./routes/search');
@@ -18,12 +17,14 @@ const imglist = require('./routes/imglist');
 // 收藏路由
 const collection = require('./routes/collection');
 
+const hot = require('./routes/hot');
+const city = require('./routes/city');
 // 创建服务器
 var server = express();
 server.listen(8081);
 
 // 将session加密
-server.use(session({ secret: "128位字符串", resave: true, saveUninitialized: true }));
+server.use(session({ secret: "128位字符串", resave: true, saveUninitialized: true, withCredentials: true }));
 
 // 跨域处理
 server.use(cors({
@@ -47,6 +48,8 @@ server.use("/my", my);
 server.use("/reg", reg);
 server.use("/imglist", imglist);
 server.use("/collection",collection);
+server.use("/hot", hot);
+server.use("/city", city);
 
 var multer = require('multer')
 const storage = multer.diskStorage({
@@ -61,5 +64,5 @@ const storage = multer.diskStorage({
 });
 var upload = multer({ storage })
 server.post('/upload', upload.array('photos', 5), function (req, res, next) {
-    res.send({ code: 0, msg: '上传成功' ,data:req.files});
+    res.send({ code: 0, msg: '上传成功', data: req.files });
 })
