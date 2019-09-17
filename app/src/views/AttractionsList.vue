@@ -117,7 +117,6 @@ export default {
         padding: 0.133333rem 0.666667rem;
         background-color: transparent;
     } */
-<<<<<<< HEAD
 .search {
   width: 100%;
   display: flex;
@@ -128,10 +127,4 @@ export default {
   width: 9.066667rem;
   margin: auto;
 }
-=======
-    .loadMore>button{
-        width: 9.066667rem;
-        margin: auto;
-    }
->>>>>>> 52df7797a6b5d4a8f2702c662a6f03e1169b5770
 </style>
