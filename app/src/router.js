@@ -6,6 +6,7 @@ import AttList from './views/AttractionsList.vue'
 import Details from './views/Details.vue'
 import My from './views/My.vue'
 import Collection from './views/Collection.vue'
+import MyAlbum from './views/MyAlbum.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,9 @@ export default new Router({
         }, {
             path: "/my",
             component: My
+        },{
+            path: "/myAlbum",
+            component: MyAlbum
         }, {
             path: "/collection",
             component: Collection
