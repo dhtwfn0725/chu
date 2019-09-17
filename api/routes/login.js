@@ -22,7 +22,6 @@ router.post("/login", (req, res) => {
             var uid = rs[0].id;
             req.session.uid = uid;
             res.send({code: 1, msg: "登录成功",data:rs[0]});
-            console.log(rs);
         }
         
     });

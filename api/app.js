@@ -14,6 +14,10 @@ const search = require('./routes/search');
 const my = require('./routes/my');
 const reg = require('./routes/reg');
 const imglist = require('./routes/imglist');
+
+// 收藏路由
+const collection = require('./routes/collection');
+
 // 创建服务器
 var server = express();
 server.listen(8081);
@@ -42,6 +46,7 @@ server.use("/search", search);
 server.use("/my", my);
 server.use("/reg", reg);
 server.use("/imglist", imglist);
+server.use("/collection",collection);
 
 var multer = require('multer')
 const storage = multer.diskStorage({

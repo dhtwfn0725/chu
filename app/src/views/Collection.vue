@@ -1,46 +1,60 @@
 <template>
     <div>
         <h2>收藏景点列表</h2>
+        <h4>{{msg}}</h4>
+        <card-item
+            v-for="(item,index) of datas"
+            :key="index"
+            :img="item.img"
+            :title="item.title"
+            :grade="item.grade"></card-item>
         <bottom-bar></bottom-bar>
     </div>
 </template>
 <script>
-import Search from "@/components/Search.vue";
-import BottomBar from "@/components/BottomBar.vue";
-import Collist from '@/components/Collist';
+    import Search from "@/components/Search.vue";
+    import BottomBar from "@/components/BottomBar.vue";
+    import Collist from '@/components/Collist';
 
-export default {
-    data() {
-        return {
-            datas:[]
-        }
-    },
-    components: {
+    export default {
+        data() {
+            return {datas: [], page: 0, msg: ""}
+        },
+        components: {
             BottomBar,
             Search,
             Collist
         },
         methods: {
             init() {
-                this.axios.get("/my").then(rs=>{
-                    // console.log(rs);
-                    if(rs.code==-1){
-                        this.$messagebox.confirm(rs.msg).then(rs=>{
-                            this.$router.push("login");
-                        })
-                    }
-                })
-                // this.axios("/my",(req,res)=>{
-                //     this.datas = res;
-                // }).then((result) => {
-                //     console.log(result);
-                // }).catch((err) => {
-                //     throw err;
-                // });
+                this.page++;
+                this
+                    .axios
+                    .get(`/collection?page=${this.page}`)
+                    .then(rs => {
+                        if (rs.code == -1) {
+                            this
+                                .$messagebox
+                                .confirm(rs.msg)
+                                .then(rs => {
+                                    this
+                                        .$router
+                                        .push("login");
+                                })
+                        } else if (rs.code == -2) {
+                            this.msg = rs.msg;
+                        } else if (rs.code == 1) {
+                            this.msg = rs.msg;
+                            var rows = this
+                                .datas
+                                .concat(rs.data);
+                            this.datas = rows;
+                        }
+                    })
             }
         },
         created() {
             this.init();
         }
-}
+    }
 </script>
