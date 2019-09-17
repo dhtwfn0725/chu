@@ -59,7 +59,7 @@ export default {
       })).then(rs=>{
         // console.log(rs);
         if(rs.code==1){
-          this.$router.push({path:"attlist"});
+          this.$router.push({path:"/"});
         }
         this.$toast(rs.msg);
       }).catch(err=>{
