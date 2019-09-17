@@ -3,25 +3,29 @@
     <div class="top-title">
       <h1>凤凰古城</h1>
       <div class="collect">
-          <span style="text-align: center;margin-right:20px;">景点等级:5A级</span>
-          <button @click="change" :class="chge==false?'':'chge'" id="btn">收藏{{num}}</button>
+        <span style="text-align: center;margin-right:20px;">景点等级:5A级</span>
+        <button @click="change" :class="chge==false?'':'chge'" id="btn">收藏</button>
       </div>
     </div>
     <div class="mid-style">
-      <div class="mid_praise">
-        <div>
-          <img src="/images/r1.gif" alt style="width:100%;border-radius:50%;">
+      <div class="mid-praise">
+        <div class="item">
+          <img src="/images/r1.gif" />
         </div>
-        <div>
-          <img src="/images/r2.jpg" alt style="width:100%;border-radius:50%;">
+        <div class="item">
+          <img src="/images/r2.jpg" />
         </div>
-        <div>+520</div>
-        <span>人评论了该景点</span>
+        <div class="item num">
+          <span>+5</span>
+        </div>
+        <div class="item text">
+          <span>条评论</span>
+        </div>
       </div>
     </div>
     <div class="top-img">
-      <img src="/images/h2.jpg" alt>
-      <span class>9.2</span>
+      <img src="/images/h2.jpg" alt />
+      <span>{{num}}</span>
     </div>
   </div>
 </template>
@@ -29,31 +33,31 @@
 export default {
   data() {
     return {
-       chge:false,
-       num:111
-    }
+      chge: false,
+      num: 111
+    };
   },
   methods: {
-    change(){
-      var btn=document.getElementById("btn");
-      if(this.chge){
-        this.chge=false;
-        btn.innerHTML="收藏"+"("+this.num+")";
-      }else{
-        this.chge=true;
-        btn.innerHTML="已收藏"+"("+this.num+")";
+    change() {
+      var btn = document.getElementById("btn");
+      if (this.chge) {
+        this.chge = false;
+        btn.innerHTML = "收藏";
+      } else {
+        this.chge = true;
+        btn.innerHTML = "取消收藏";
       }
     }
-  },
+  }
 };
 </script>
 <style scoped>
 .top-title {
   text-align: center;
 }
-.collect>button{
-  width:25%;
-  background-color:#4e74d8;
+.collect > button {
+  width: 25%;
+  background-color: #4e74d8;
   border: 0;
   padding: 3px 5px;
   margin-bottom: 2px;
@@ -61,7 +65,7 @@ export default {
   color: #fff;
   font-size: 12px;
 }
-.collect>.chge{
+.collect > .chge {
   color: #fff;
   background-color: red;
 }
@@ -70,33 +74,35 @@ export default {
   height: 2rem;
   text-align: center;
 }
-.mid_praise {
+.mid-praise {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  width: 60%;
-  height: 90%;
   border-top: 1px solid #d0cccc;
   text-align: center;
   align-items: center;
-  margin: 0 auto;
+  justify-content: center;
 }
-.mid_praise > div {
+.mid-praise > div.item {
   width: 45px;
   height: 45px;
   border-radius: 50%;
   margin-top: 0.2rem;
+  overflow: hidden;
 }
-.mid_praise > :nth-child(3) {
-  border-radius: 50%;
+.mid-praise > div.item img {
+  width: 100%;
+  height: 100%;
+}
+.mid-praise > .item.num,
+.mid-praise > .item.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mid-praise > .item.num {
   background-color: #4e74d8;
   color: white;
   text-align: center;
-  line-height: 350%;
   font-weight: 600;
-}
-.mid_praise > span {
-  margin-top: 10px;
 }
 .top-img {
   width: 75%;

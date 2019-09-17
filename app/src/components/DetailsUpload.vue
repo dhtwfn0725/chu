@@ -1,14 +1,27 @@
 <template>
-  <div>
-    <van-action-sheet v-model="show" title="上传">
+  <div class="upload">
+    <van-action-sheet v-model="show" title="添加评论">
       <div class="hide">
-        <van-cell-group>
-          <van-field v-model="message" label="评论" type="textarea" placeholder="请输入评论" rows="5" autosize id="father"/>
-          <van-uploader v-model="fileList" multiple :max-count="5" id="upload"/>
-        </van-cell-group>
+        <div class="textarea">
+          <van-cell-group>
+            <van-field
+              v-model="message"
+              label="评论"
+              type="textarea"
+              placeholder="请输入评论内容"
+              rows="5"
+              autosize
+              id="father"
+              maxlength="100"
+            />
+          </van-cell-group>
+        </div>
+        <div class="upload-img">
+          <van-uploader v-model="fileList" multiple :max-count="5" id="upload" />
+        </div>
       </div>
     </van-action-sheet>
-    <button id="btn" @click="isShow">添加评论</button>
+    <div class="bottom-btn" id="btn" @click="isShow">添加评论</div>
   </div>
 </template>
 <script>
@@ -17,7 +30,7 @@ export default {
     return {
       show: false,
       fileList: [],
-      message:""
+      message: ""
     };
   },
   methods: {
@@ -28,30 +41,28 @@ export default {
 };
 </script>
 <style scoped>
-div {
-  text-align: center;
+.textarea >>> .van-field__body textarea {
+  border: 1px dashed #ccc;
+  padding: 0.133333rem;
 }
-#btn {
-  width: 80%;
+.textarea >>> .van-field__label {
+  width: 1rem;
+}
+.bottom-btn {
+  position: fixed;
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
   background-color: #4e74d8;
-  border-radius: 31px;
-  border: 0;
-  text-align: center;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  font-size: 20px;
-  color: white;
-  margin-top: 1px;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
 }
-#upload{
-    position: absolute;
-    top:10px;left:50px;
-}
-.van-cell-group{
-    position: relative;
-}
-.van-uploader{
-    position: absolute;
-    top:40px;left:20px;
+.upload-img {
+  padding-left: .4rem;
+  margin-top: .266667rem;
 }
 </style>

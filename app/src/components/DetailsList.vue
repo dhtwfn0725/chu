@@ -1,56 +1,70 @@
 <template>
-    <div>
-        <div id="main">
-            <div class="top">
-                <div>
-                    <div style="width:45px;height:45px;">
-                        <img src="/images/r1.gif" style="width:100%;border-radius:50%;">
-                    </div>
-                    <span>爱吃草的牛:</span>
-                </div>
-                <div><span>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</span></div>
-                <div class="pic">
-                    <img src="/images/h2.jpg" style="width:30%;margin-right:0.1rem;
-                    border-radius:5%;">
-                    <img src="/images/h1.jpg" style="width:30%;border-radius:5%;">
-                </div>
-            </div>
+  <div class="comment-card">
+    <div id="main" class="item-box">
+      <div class="user">
+        <div class="avatar">
+          <img src="/images/r1.gif" style="width:100%;border-radius:50%;" />
         </div>
+        <div class="uname">
+            <span>爱吃草的牛:</span>            
+        </div>
+      </div>
+      <div class="content">
+          这里的风景真的很不错啊,早点来就好了啊，下次还来这里玩吗？
+      </div>
+      <div class="pic">
+        <img src="/images/h2.jpg" />
+        <img src="/images/h1.jpg" />
+        <img src="/images/h1.jpg" />
+        <img src="/images/h1.jpg" />
+        <img src="/images/h1.jpg" />
+      </div>
+      <div class="date">
+          <span>2019-09-17 12:12:12</span>
+      </div>
     </div>
+  </div>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
 <style scoped>
-    #main{
-        width:90%;
-        margin: 0 auto;
-        border-radius: 20px;
-    }
-    .top{
-        align-items: center;
-        width:90%;
-        margin: 0 auto;
-        border: 1px solid #888;
-        border-radius: 12px;
-        padding: 5px 0;
-    }
-    .top>div:nth-child(1){
-        display: flex;
-        align-items: center;
-    }
-    .top>div:nth-child(1)>div,
-    .top>div:nth-child(2),
-    .pic{
-         margin-left: .566667rem;
-    }
-    .top>div:nth-child(2){
-        width:90%;
-    }
-    .top>div:nth-child(2)>span{
-        width:100%;
-        word-wrap: break-word;    
-    }
+.item-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px dashed #ccc;
+  padding: .2rem 0;
+}
+.item-box .user {
+    display:flex;
+    align-items: center;
+}
+.item-box .user .avatar {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: .2rem;
+}
+.item-box .content {
+    font-size: 12px;
+    line-height: 22px;
+}
+.item-box .pic {
+    box-sizing: border-box;
+    padding: .133333rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+.item-box .pic img {
+    width: 2.666667rem;
+    height: 1.733333rem;
+    margin-right: .2rem;
+    margin-bottom: .2rem;
+    border-radius: .133333rem
+}
+.item-box .date {
+    align-self: flex-end
+}
 </style>
