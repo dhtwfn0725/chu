@@ -3,7 +3,7 @@
     <!-- 头像部分 -->
     <div class="head">
       <div class="head_pic">
-        <img src="../../public/images/my_head.png" class="head_img">
+        <img src="/images/my_head.png" class="head_img">
       </div>
       <div class="head_text">
         <span class="head_id">菜鸡网_菜鸡沈</span>
@@ -14,27 +14,27 @@
     <div class="middle">
       <div class="card">
         <div class="card_item">
-          <div>103</div>
+          <div>{{pics}}</div>
           <div>照片</div>
         </div>
         <div class="card_item">
-          <div>1.7k</div>
+          <div>{{disc}}k</div>
           <div>评论</div>
         </div>
         <div class="card_item">
-          <div>1.5k</div>
+          <div>{{atte}}k</div>
           <div>关注</div>
         </div>
       </div>
     </div>
     <!-- 相册 -->
     <div class="album" >
-      <div class="album-item">
+      <div class="album-item" v-for="(item,index) in data" :key="index">
         <div class="album_pic">
-          <img src="../../public/images/album1.png" class="album_img">
+          <img :src="item.img" class="album_img" @click="toAlbum" style="object-fit: cover">
         </div>
         <div class="album_name">
-          酒店
+          {{item.name}}
         </div>
       </div>
       
@@ -63,22 +63,57 @@ import BottomBar from "../components/BottomBar.vue";
 export default {
   data(){
     return {
-      album:{
-        "data":[
-          {
-            "id":"1",
-            
-          },
-        ]
-      }
+      albums:{},
+      pics:"0",
+      disc:"0",
+      atte:"0",
+      // data 留空
+      data: [
+        {
+        "id": 1,
+        "name": "黄鹤楼",
+        "user_id": 1,
+        "createtime": "2019-09-14T14:04:31.000Z",
+        "img": "/images/album1.png"
+        },
+        {
+        "id": 2,
+        "name": "十堰",
+        "user_id": 1,
+        "createtime": "2019-09-14T14:04:31.000Z",
+        "img": "images/hhl.jpg"
+        }
+      ]
     }
   },
   created(){
     console.log(123);
-    
+    this.load()
   },
   methods: {
-   
+    load(){
+      console.log('读取到load了~')
+      var url="/my";
+      this.axios.get(url,{params:{}}).then(res=>{
+        // 判断是否登录状态
+        if(res.code==-1){
+          this.$messagebox("消息","亲，请先登录呢~")
+          this.$router.push('/login')
+        }
+        // 如果登录成功
+        if(res.code==0){
+          console.log(res.data)
+          this.albums=res.data;
+          this.pics=albums.pic_num;
+          this.disc=albums.comment_num;
+          this.atte=albums.collect_num;
+          this.data=albums.result
+        }
+      })
+    },
+    toAlbum(){
+      this.$router.push('/myAlbum')
+    }
   },
   components:{
     BottomBar
@@ -89,11 +124,11 @@ export default {
 .container {
   background-color: #f0f8ff1a;
   overflow: hidden;
+  min-height: 100vh;
 }
 /* 头像部分 */
 .head{
   height: 7.733333rem;
-  
   display: flex;
   flex-direction: column;
   justify-content:flex-end;
@@ -164,7 +199,9 @@ export default {
   overflow: hidden;
 }
 .album_img{
-  width:4.3rem;
+  width:100%;
+  height:100%;
+  background: #000;
 }
 .album_name{
   margin:.45rem .05rem;
