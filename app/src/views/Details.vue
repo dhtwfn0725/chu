@@ -69,6 +69,7 @@ export default {
 #detail {
   background-color: #ebecec !important;
   padding-top: 0.133333rem;
+  padding-bottom:0.533rem; 
 }
 #main {
   display: flex;
@@ -99,6 +100,7 @@ export default {
   font-size: 16px;
   text-align: center;
   background-color: #4e74d8;
+  border-radius: 31px;
   bottom: 0;
   left: 0;
   z-index: 9;

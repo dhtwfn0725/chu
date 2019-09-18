@@ -19,9 +19,10 @@
         <div class="upload-img">
           <van-uploader v-model="fileList" multiple :max-count="5" id="upload" />
         </div>
+        <div class="upda">上传</div>
       </div>
     </van-action-sheet>
-    <div class="bottom-btn" id="btn" @click="isShow">添加评论</div>
+    <div class="bottom-btn" @click="isShow">添加评论</div>
   </div>
 </template>
 <script>
@@ -57,6 +58,7 @@ export default {
   font-size: 16px;
   text-align: center;
   background-color: #4e74d8;
+  border-radius: 31px;
   bottom: 0;
   left: 0;
   z-index: 9;
@@ -64,5 +66,15 @@ export default {
 .upload-img {
   padding-left: .4rem;
   margin-top: .266667rem;
+}
+.upda{
+  position: absolute;
+  top:220px;
+  left: 200px;
+  color: white;
+  font-size: 20px;
+  padding: 10px 25px;
+  background-color: #4e74d8; 
+  border-radius: 31px;
 }
 </style>

@@ -60,7 +60,7 @@ export default {
   background-color: #4e74d8;
   border: 0;
   padding: 3px 5px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   border-radius: 31px;
   color: #fff;
   font-size: 12px;
@@ -76,10 +76,12 @@ export default {
 }
 .mid-praise {
   display: flex;
+  width:60%;
   border-top: 1px solid #d0cccc;
   text-align: center;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 .mid-praise > div.item {
   width: 45px;
