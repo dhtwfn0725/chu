@@ -7,7 +7,7 @@ router.get("/",(req,res)=>{
   pool.query(sql,[],(err,result)=>{
     if(err){
       res.send(err);
-      console.log(err);
+      //console.log(err);
     }else{
       res.send(result);
       /*res.writeHead(200,{

@@ -64,10 +64,11 @@ const storage = multer.diskStorage({
     },
     filename(req, file, cb) {
         const filenameArr = file.originalname.split('.');
-        cb(null, Date.now() + '.' + filenameArr[filenameArr.length - 1]);
+        cb(null, filenameArr[0] + Date.now() + '.' + filenameArr[filenameArr.length - 1]);
     }
 });
 var upload = multer({ storage })
 server.post('/upload', upload.array('photos', 5), function (req, res, next) {
+    console.log(req.files);
     res.send({ code: 0, msg: '上传成功', data: req.files });
 })

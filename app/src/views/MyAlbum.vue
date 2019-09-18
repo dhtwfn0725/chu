@@ -13,6 +13,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -25,16 +26,17 @@ export default {
   },
   methods: {
     load(){
-      console.log('读取到load了')
-      var url="";
+      // console.log(this.$route)
+      var url="/imglist";
       this.axios.get(url,{params:{
-
+        cid:this.$route.query.cid
       }})
       .then(res=>{
-        if(res.code==1){
+        if(res.code==0){
+          console.log(res.data)
           this.list=res.data;
-        }else{
-          this.$messagebox("消息","啊哦，好像哪里出错了~")
+        }else if(res.code==-1){
+          this.$messagebox("消息",`啊哦，${res.msg}好像出错了~`)
         }
       })
     }

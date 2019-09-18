@@ -17,9 +17,9 @@
           </van-cell-group>
         </div>
         <div class="upload-img">
-          <van-uploader v-model="fileList" multiple :max-count="5" id="upload" />
+          <van-uploader v-model="fileList" multiple :max-count="5" />
         </div>
-        <div class="upda">上传</div>
+        <div class="upda">提交</div>
       </div>
     </van-action-sheet>
     <div class="bottom-btn" @click="isShow">添加评论</div>
@@ -65,16 +65,16 @@ export default {
 }
 .upload-img {
   padding-left: .4rem;
-  margin-top: .266667rem;
+  margin-top: -5px;
+  margin-left: 40px;
 }
 .upda{
   position: absolute;
-  top:220px;
-  left: 200px;
-  color: white;
-  font-size: 20px;
-  padding: 10px 25px;
-  background-color: #4e74d8; 
-  border-radius: 31px;
+  text-align: center;
+  top:0;
+  font-size: 15px;
+  padding: 9px 18px;
+  /* color: white; */
+  /* background-color:#4e74d8;  提交样式，浅蓝可要可不要*/
 }
 </style>

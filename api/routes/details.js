@@ -8,6 +8,7 @@ const pool=require("../pool")
 //http://localhost:3000/details?lid=1
 router.get("/",(req,res)=>{
   var lid=req.query.lid;
+  console.log(lid);
   var output={
     product:{},
     specs:[],

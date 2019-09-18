@@ -56,10 +56,7 @@ export default {
       Vue.use(ImagePreview);
       ImagePreview({
         images: ["images/h1.jpg", "images/h2.jpg"],
-        startPosition: 1,
-        onClose() {
-          // do something
-        }
+        startPosition: 0,
       });
     }
   }
@@ -105,7 +102,6 @@ export default {
   left: 0;
   z-index: 9;
 }
-
 .top-font {
   font-size: 16px;
   font-weight: 500;
