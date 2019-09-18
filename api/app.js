@@ -20,6 +20,9 @@ const collection = require('./routes/collection');
 // 详情路由
 const attDetail = require('./routes/attDetail');
 
+// 评论相关信息接口
+const comment = require('./routes/comment');
+
 const hot = require('./routes/hot');
 const city = require('./routes/city');
 
@@ -59,6 +62,7 @@ server.use("/hot", hot);
 server.use("/city", city);
 server.use("/saveimg", saveImg);
 server.use("/attDetail",attDetail);
+server.use("/commentlist",comment);
 
 var multer = require('multer')
 const storage = multer.diskStorage({

@@ -9,7 +9,6 @@
           <div class="jdyl">
             <van-image-preview v-model="show" :images="images" @change="onChange">
               <template v-slot:index>第{{ index }}页</template>
-              111
             </van-image-preview>
           </div>
         </div>
@@ -17,7 +16,7 @@
       <van-tab title="景点评论">
         <div class="comment">
           <div class="top-font">网友评论：</div>
-          <detailslist v-for="(item,index) of num" :key="index" class="footer-margin"></detailslist>
+          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
           <detailsupload></detailsupload>
         </div>
       </van-tab>
@@ -35,12 +34,12 @@ export default {
   data() {
     return {
       active: 0,
-      num: 5,
       show: false,
       index: 0,
       images: [],
       datas: [],
-      jdid: ""
+      jdid: "",
+      commentDatas:[]
     };
   },
   components: {
@@ -66,13 +65,22 @@ export default {
       this.jdid = url.split("?")[1].split("=")[1];
       // console.log(this.jdid);
 
+      // 调用景点详情接口
       this.axios.get(`/attDetail?jdid=${this.jdid}`).then(res => {
         if (res.length > 0) {
           this.datas = res;
-          console.log(res);
+          // console.log(res);
           desc.innerHTML = res[0].desc;
         }
       });
+
+      // 调用评论相关信息接口
+      this.axios.get("/commentlist").then(res=>{
+        if(res.length>0){
+          this.commentDatas = res;
+          console.log(res);
+        }
+      })
     }
   },
   created() {
