@@ -1,7 +1,7 @@
 <template>
     <div class="card-item">
         <div class="img">
-            <router-link to="details">
+            <router-link :to="`details?id=${item.id}`">
                 <img :src="item.img">
             </router-link>
         </div>
