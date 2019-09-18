@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
         if (err)
             throw err;
         var data = [];
-        console.log(rs)
+        //console.log(rs)
         //[{date:'2019-09-17',imgs:[]}]
         var dateArr = [];
         for (let i = 0; i < rs.length; i++) {
