@@ -1,6 +1,25 @@
 <template>
   <div class="bottom-bar">
-    <div class="add">
+    <div class="image-box">
+      <van-action-sheet v-model="show" title="相册列表-添加图片">
+        <div v-if="isLogin">
+          <van-grid :column-num="2">
+            <van-grid-item v-for="(item,index) of album" icon="plus" :key="index">
+              <van-uploader :name="item.id" accept="image/*" :preview-image=false multiple :max-count=5 :after-read="uploadImg"> 
+              <van-image :src="item.img" />
+              <van-icon name="plus" class="plus-icon" />
+              </van-uploader>
+            </van-grid-item>
+          </van-grid>
+        </div>
+        <div v-else class="nologin">
+          没有登录，请先
+          <router-link to="/login">登录</router-link>或
+          <router-link to="/reg">注册</router-link>
+        </div>
+      </van-action-sheet>
+    </div>
+    <div class="add" @click="addImage">
       <span>+</span>
     </div>
     <van-tabbar route>
@@ -49,15 +68,55 @@
   justify-content: center;
   align-items: center;
 }
+.nologin {
+  min-height: 2.5rem;
+  padding-top: 0.266667rem;
+  text-align: center;
+  font-size: 16px;
+}
+.image-box >>> .van-image__img {
+  opacity: 0.5;
+}
+.plus-icon {
+  position: absolute;
+  font-size: 40px;
+  color: #fff;
+  left: 50%;
+  top:50%;
+  margin-left: -20px;
+  margin-top: -20px;
+}
 </style>
 <script>
 import { log } from "util";
 export default {
   data() {
     return {
-      selected: "home"
+      selected: "home",
+      show: false,
+      isLogin: false,
+      album: []
     };
   },
-  methods: {}
+  created() {
+    this.axios
+      .get("/my")
+      .then(res => {
+        if (res.code == 0) {
+          this.isLogin = true;
+          this.album = res.data.result;
+        }
+      })
+      .catch(err => {});
+  },
+  methods: {
+    addImage() {
+      this.show = true;
+    },
+    uploadImg(file,name){
+      console.log(file,name);
+      // todo  
+    }
+  }
 };
 </script>

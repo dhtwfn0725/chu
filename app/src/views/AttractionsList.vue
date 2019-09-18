@@ -115,6 +115,5 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-right: 0.533333rem;
 }
 </style>
