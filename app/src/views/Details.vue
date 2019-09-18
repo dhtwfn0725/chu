@@ -17,7 +17,7 @@
         <div class="comment">
           <div class="top-font">网友评论：</div>
           <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
-          <detailsupload></detailsupload>
+          <detailsupload :sid="1"></detailsupload>
         </div>
       </van-tab>
     </van-tabs>
@@ -60,17 +60,18 @@ export default {
       });
     },
     init() {
+        //   这个传参方式怎么这么low?
       var url = location.href;
       // console.log(url);
       this.jdid = url.split("?")[1].split("=")[1];
       // console.log(this.jdid);
 
-      // 调用景点详情接口
+      // 调用景点详情接口  为什么都不看接口文档呢？
       this.axios.get(`/attDetail?jdid=${this.jdid}`).then(res => {
         if (res.length > 0) {
           this.datas = res;
           // console.log(res);
-          desc.innerHTML = res[0].desc;
+          desc.innerHTML = res[0].desc;  // 为什么要操作DOM
         }
       });
 

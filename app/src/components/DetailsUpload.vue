@@ -17,7 +17,15 @@
           </van-cell-group>
         </div>
         <div class="upload-img">
-          <van-uploader v-model="fileList" multiple :max-count="5" />
+          <!-- <van-uploader v-model="fileList" :after-read="afterRead" @delete="delImg" multiple :max-count="5" /> -->
+          <div class="posting-uploader">
+            <span v-for="(item,nn) in fileList" :key="nn">
+              <img :src="item.content" width="80" height="80" class="uploadimg" />
+              <van-icon name="close" @click="delImg(nn)" class="delte" />
+            </span>
+            <van-uploader v-model="fileList" :preview-image="false" :after-read="afterRead" :accept="'image/*'" multiple :max-count="5" >
+            </van-uploader>
+          </div>
         </div>
         <div class="upda">提交</div>
       </div>
@@ -31,12 +39,42 @@ export default {
     return {
       show: false,
       fileList: [],
-      message: ""
+      message: "",
     };
   },
+  props: ["sid"],
   methods: {
     isShow() {
       this.show = true;
+    },
+    delImg(n) {
+      console.log(n)
+    },
+    afterRead(files) {
+      console.log(files);
+      if (!(files instanceof Array)) {
+        files = [files];
+      }
+      // todo
+      return;
+      var formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("photos", files[i].file);
+      }
+      console.log(formData.get("file"));
+      let config = {
+        headers: { "Content-Type": "multipart/form-data" }
+      };
+
+      this.axios.post("/upload", formData, config).then(response => {
+        let ret = response.data;
+        let cid = this.sid;
+        console.log(ret);
+        for (let i = 0; i < ret.length; i++) {
+          this.fileList.push(ret[i].destination + ret[i].filename);
+        }
+        console.log(this.fileList);
+      });
     }
   }
 };
@@ -64,17 +102,22 @@ export default {
   z-index: 9;
 }
 .upload-img {
-  padding-left: .4rem;
+  padding-left: 0.4rem;
   margin-top: -5px;
   margin-left: 40px;
 }
-.upda{
+.upda {
   position: absolute;
   text-align: center;
-  top:0;
+  top: 0;
+  right: 0;
   font-size: 15px;
   padding: 9px 18px;
   /* color: white; */
   /* background-color:#4e74d8;  提交样式，浅蓝可要可不要*/
+}
+.van-action-sheet__close {
+  left: 0;
+  right: auto;
 }
 </style>

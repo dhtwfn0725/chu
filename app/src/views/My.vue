@@ -73,6 +73,7 @@ export default {
         // 判断是否登录状态
         if(res.code==-1){
           this.$messagebox("消息","亲，请先登录呢~")
+          // 这里不要跳转到登录，否则用户退不回来了
           this.$router.push('/login')
         }
         // 如果登录成功
