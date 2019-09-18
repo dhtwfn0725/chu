@@ -10,8 +10,8 @@
           <van-field v-model="uname" required clearable label="用户名" placeholder="请输入用户名" />
           <van-field v-model="upwd" type="password" label="密码" placeholder="请输入密码" required />
         </van-cell-group>
-        <div class="submit">
-          <span @click="reg">注 册</span>
+        <div class="submit" @click="reg">
+          <span>注 册</span>
         </div>
       </div>
 
