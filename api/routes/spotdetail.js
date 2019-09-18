@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
                 return;
             }
             data['images'] = result;
-            console.log(data);
+            //console.log(data);
             res.send(data);
         })
   })

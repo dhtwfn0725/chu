@@ -18,11 +18,11 @@
           <div>照片</div>
         </div>
         <div class="card_item">
-          <div>{{disc}}k</div>
+          <div>{{disc}}</div>
           <div>评论</div>
         </div>
         <div class="card_item">
-          <div>{{atte}}k</div>
+          <div>{{atte}}</div>
           <div>关注</div>
         </div>
       </div>
@@ -31,26 +31,16 @@
     <div class="album" >
       <div class="album-item" v-for="(item,index) in data" :key="index">
         <div class="album_pic">
-          <img :src="item.img" class="album_img" @click="toAlbum" style="object-fit: cover">
+          <router-link :to="{path:'/myAlbum',query:{cid:`${item.id}`}}">
+            <img :src="item.img" class="album_img"  style="object-fit: cover">
+          </router-link>
+
         </div>
         <div class="album_name">
           {{item.name}}
         </div>
       </div>
-      
-
     </div>
-
-     <!-- <message
-      class="itemstyle"
-      v-for="(item,index) in datas.data"
-      :key="index"
-      :id="item.id"
-      :title="item.title"
-      :subtitle="item.subtitle"
-      :sendtime="item.time"
-      :itemClick="clickitem"
-     ></message> -->
 
      <div>
        <bottom-bar></bottom-bar>
@@ -68,22 +58,7 @@ export default {
       disc:"0",
       atte:"0",
       // data 留空
-      data: [
-        {
-        "id": 1,
-        "name": "黄鹤楼",
-        "user_id": 1,
-        "createtime": "2019-09-14T14:04:31.000Z",
-        "img": "/images/album1.png"
-        },
-        {
-        "id": 2,
-        "name": "十堰",
-        "user_id": 1,
-        "createtime": "2019-09-14T14:04:31.000Z",
-        "img": "images/hhl.jpg"
-        }
-      ]
+      data: []
     }
   },
   created(){
@@ -92,7 +67,7 @@ export default {
   },
   methods: {
     load(){
-      console.log('读取到load了~')
+      // console.log('读取到load了~')
       var url="/my";
       this.axios.get(url,{params:{}}).then(res=>{
         // 判断是否登录状态
@@ -104,10 +79,10 @@ export default {
         if(res.code==0){
           console.log(res.data)
           this.albums=res.data;
-          this.pics=albums.pic_num;
-          this.disc=albums.comment_num;
-          this.atte=albums.collect_num;
-          this.data=albums.result
+          this.pics=this.albums.pic_num;
+          this.disc=this.albums.comment_num;
+          this.atte=this.albums.collect_num;
+          this.data=this.albums.result
         }
       })
     },

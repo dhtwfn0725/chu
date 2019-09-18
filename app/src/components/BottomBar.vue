@@ -3,11 +3,19 @@
     <div class="image-box">
       <van-action-sheet v-model="show" title="相册列表-添加图片">
         <div v-if="isLogin">
-          <van-grid :column-num="2">
+          
+          <van-grid :column-num="3">
             <van-grid-item v-for="(item,index) of album" icon="plus" :key="index">
-              <van-uploader :name="item.id" accept="image/*" :preview-image=false multiple :max-count=5 :after-read="uploadImg"> 
-              <van-image :src="item.img" />
-              <van-icon name="plus" class="plus-icon" />
+              <van-uploader
+                :name="item.id"
+                accept="image/*"
+                :preview-image="false"
+                multiple
+                :max-count="5"
+                :after-read="uploadImg"
+              >
+                <van-image :src="item.img" />
+                <van-icon name="plus" class="plus-icon" />
               </van-uploader>
             </van-grid-item>
           </van-grid>
@@ -82,13 +90,13 @@
   font-size: 40px;
   color: #fff;
   left: 50%;
-  top:50%;
+  top: 50%;
   margin-left: -20px;
   margin-top: -20px;
 }
 </style>
 <script>
-import { log } from "util";
+import qs from "qs";
 export default {
   data() {
     return {
@@ -113,9 +121,39 @@ export default {
     addImage() {
       this.show = true;
     },
-    uploadImg(file,name){
-      console.log(file,name);
-      // todo  
+    uploadImg(files, name) {
+      console.log(files, name);
+      if (!(files instanceof Array)) {
+        files = [files];
+      }
+      // todo
+      var formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("photos", files[i].file);
+      }
+      console.log(formData.get("file"));
+      let config = {
+        headers: { "Content-Type": "multipart/form-data" }
+      };
+
+      this.axios.post("/upload", formData, config).then(response => {
+        let ret = response.data;
+        let cid = name.name;
+        let imgurls = "";
+        console.log(ret);
+        for (let i = 0; i < ret.length; i++) {
+          imgurls += ret[i].destination + ret[i].filename + ",";
+        }
+        imgurls = imgurls.slice(0, -1);
+        this.axios
+          .post("/saveimg", qs.stringify({ cid, imgurls }))
+          .then(response => {
+            this.$toast({
+              message: "添加成功",
+              position: "bottom"
+            });
+          });
+      });
     }
   }
 };
