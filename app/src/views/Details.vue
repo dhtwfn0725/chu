@@ -38,7 +38,7 @@ export default {
       num: 5,
       show: false,
       index: 0,
-      images: ["images/h1.jpg", "images/h2.jpg"],
+      images: [],
       datas: [],
       jdid: ""
     };
@@ -53,9 +53,10 @@ export default {
       this.index = index;
     },
     showImg() {
+      // console.log(this.datas[0].img);
       Vue.use(ImagePreview);
       ImagePreview({
-        images: ["images/h1.jpg", "images/h2.jpg"],
+        images: [this.datas[0].img],
         startPosition: 0,
       });
     },
