@@ -66,7 +66,7 @@ export default {
         }
         });
         
-      }, 1000);
+      }, 800);
       
     },
 
@@ -81,7 +81,7 @@ export default {
         });
         this.$toast("刷新成功");
         this.isLoading = false;
-      },1000);
+      },800);
     },
 
   }

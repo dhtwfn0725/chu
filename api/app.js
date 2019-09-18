@@ -17,6 +17,9 @@ const imglist = require('./routes/imglist');
 // 收藏路由
 const collection = require('./routes/collection');
 
+// 详情路由
+const attDetail = require('./routes/attDetail');
+
 const hot = require('./routes/hot');
 const city = require('./routes/city');
 
@@ -55,6 +58,7 @@ server.use("/collection",collection);
 server.use("/hot", hot);
 server.use("/city", city);
 server.use("/saveimg", saveImg);
+server.use("/attDetail",attDetail);
 
 var multer = require('multer')
 const storage = multer.diskStorage({

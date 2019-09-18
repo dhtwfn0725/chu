@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="top-title">
-      <h1>凤凰古城</h1>
+      <h1>{{item.title}}</h1>
       <div class="collect">
-        <span style="text-align: center;margin-right:20px;">景点等级:5A级</span>
-        <button @click="change" :class="chge==false?'':'chge'" id="btn">收藏</button>
+        <span style="text-align: center;margin-right:20px;">景点等级:{{item.grade}}A级</span>
+        <van-button v-model="collectionNum" @click="change" :class="chge==false?'':'chge'" id="btn">收藏</van-button>
       </div>
     </div>
     <div class="mid-style">
@@ -12,11 +12,11 @@
         <div class="item">
           <img src="/images/r1.gif" />
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <img src="/images/r2.jpg" />
-        </div>
+        </div> -->
         <div class="item num">
-          <span>+5</span>
+          <span>+{{item.comment_num}}</span>
         </div>
         <div class="item text">
           <span>条评论</span>
@@ -24,17 +24,21 @@
       </div>
     </div>
     <div class="top-img">
-      <img src="/images/h2.jpg" alt />
-      <span>{{num}}</span>
+      <img :src="item.img" alt />
+      <span id="commentNum">{{item.collection_num}}</span>
     </div>
   </div>
 </template>
 <script>
 export default {
+  props:{
+    item:{default:Object}
+  },
   data() {
     return {
       chge: false,
-      num: 111
+      num: 111,
+      collectionNum:0
     };
   },
   methods: {
@@ -43,11 +47,16 @@ export default {
       if (this.chge) {
         this.chge = false;
         btn.innerHTML = "收藏";
+        commentNum.innerHTML--;
       } else {
         this.chge = true;
         btn.innerHTML = "取消收藏";
+        commentNum.innerHTML++;
       }
-    }
+      this.collectionNum = parseInt(commentNum.innerHTML);
+      console.log(this.collectionNum);
+    },
+    
   }
 };
 </script>

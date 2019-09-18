@@ -1,12 +1,10 @@
 <template>
   <div id="detail">
-    <detailspic></detailspic>
+    <detailspic v-for="(item,index) in datas" :key="index" :item="item"></detailspic>
     <van-tabs v-model="active" id="bg">
       <van-tab title="景点介绍">
         <div id="main" class="main">
-          <div
-            class="mid-title"
-          >凤凰古城，建于清康熙四十三年（1704年）。距铜仁凤凰机场27公里，怀化芷江机场57公里，张家界荷花机场280公里；G209国道与S308省道贯穿全境，枝柳铁路穿境而过。凤凰古城与吉首的德夯苗寨、永顺的猛洞河、贵州的梵净山相毗邻，是怀化、吉首、贵州铜仁三地之间的必经之路。是湖南十大文化遗产之一，曾被新西兰作家路易·艾黎称赞为中国最美丽的小城，与云南丽江古城、山西平遥古城媲美，享有“北平遥、南凤凰”之名。是国家历史文化名城，国家AAAA级景区。</div>
+          <div class="mid-title" id="desc"></div>
           <div class="bottom-btn" @click="showImg">景点图片阅览</div>
           <div class="jdyl">
             <van-image-preview v-model="show" :images="images" @change="onChange">
@@ -40,7 +38,9 @@ export default {
       num: 5,
       show: false,
       index: 0,
-      images: ["images/h1.jpg", "images/h2.jpg"]
+      images: ["images/h1.jpg", "images/h2.jpg"],
+      datas: [],
+      jdid: ""
     };
   },
   components: {
@@ -61,7 +61,24 @@ export default {
           // do something
         }
       });
+    },
+    init() {
+      var url = location.href;
+      // console.log(url);
+      this.jdid = url.split("?")[1].split("=")[1];
+      // console.log(this.jdid);
+
+      this.axios.get(`/attDetail?jdid=${this.jdid}`).then(res => {
+        if (res.length > 0) {
+          this.datas = res;
+          console.log(res);
+          desc.innerHTML = res[0].desc;
+        }
+      });
     }
+  },
+  created() {
+    this.init();
   }
 };
 </script>
@@ -69,7 +86,7 @@ export default {
 #detail {
   background-color: #ebecec !important;
   padding-top: 0.133333rem;
-  padding-bottom:0.533rem; 
+  padding-bottom: 0.533rem;
 }
 #main {
   display: flex;
@@ -77,7 +94,8 @@ export default {
   justify-content: center;
   padding-bottom: 1.15rem;
 }
-.mid-title,.comment {
+.mid-title,
+.comment {
   width: 9.6rem;
   box-sizing: border-box;
   padding: 0.2rem;
@@ -94,7 +112,7 @@ export default {
 .bottom-btn {
   position: fixed;
   width: 100%;
-  height:1.2rem;
+  height: 1.2rem;
   line-height: 1.2rem;
   color: #fff;
   font-size: 16px;
