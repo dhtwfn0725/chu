@@ -17,11 +17,12 @@
           </van-cell-group>
         </div>
         <div class="upload-img">
-          <van-uploader v-model="fileList" multiple :max-count="5" id="upload" />
+          <van-uploader v-model="fileList" multiple :max-count="5" />
         </div>
+        <div class="upda">提交</div>
       </div>
     </van-action-sheet>
-    <div class="bottom-btn" id="btn" @click="isShow">添加评论</div>
+    <div class="bottom-btn" @click="isShow">添加评论</div>
   </div>
 </template>
 <script>
@@ -57,12 +58,23 @@ export default {
   font-size: 16px;
   text-align: center;
   background-color: #4e74d8;
+  border-radius: 31px;
   bottom: 0;
   left: 0;
   z-index: 9;
 }
 .upload-img {
   padding-left: .4rem;
-  margin-top: .266667rem;
+  margin-top: -5px;
+  margin-left: 40px;
+}
+.upda{
+  position: absolute;
+  text-align: center;
+  top:0;
+  font-size: 15px;
+  padding: 9px 18px;
+  /* color: white; */
+  /* background-color:#4e74d8;  提交样式，浅蓝可要可不要*/
 }
 </style>

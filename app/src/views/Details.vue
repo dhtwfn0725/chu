@@ -56,10 +56,7 @@ export default {
       Vue.use(ImagePreview);
       ImagePreview({
         images: ["images/h1.jpg", "images/h2.jpg"],
-        startPosition: 1,
-        onClose() {
-          // do something
-        }
+        startPosition: 0,
       });
     }
   }
@@ -69,6 +66,7 @@ export default {
 #detail {
   background-color: #ebecec !important;
   padding-top: 0.133333rem;
+  padding-bottom:0.533rem; 
 }
 #main {
   display: flex;
@@ -99,11 +97,11 @@ export default {
   font-size: 16px;
   text-align: center;
   background-color: #4e74d8;
+  border-radius: 31px;
   bottom: 0;
   left: 0;
   z-index: 9;
 }
-
 .top-font {
   font-size: 16px;
   font-weight: 500;
