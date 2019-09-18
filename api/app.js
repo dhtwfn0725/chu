@@ -19,6 +19,10 @@ const collection = require('./routes/collection');
 
 const hot = require('./routes/hot');
 const city = require('./routes/city');
+
+//  插入图片到用户指定的图集
+const saveImg = require('./routes/addImg');
+
 // 创建服务器
 var server = express();
 server.listen(8081);
@@ -50,6 +54,7 @@ server.use("/imglist", imglist);
 server.use("/collection",collection);
 server.use("/hot", hot);
 server.use("/city", city);
+server.use("/saveimg", saveImg);
 
 var multer = require('multer')
 const storage = multer.diskStorage({
