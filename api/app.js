@@ -5,7 +5,7 @@ const cors = require("cors");
 const session = require('express-session');
 const Tool = require('./units/tool.js');
 const loginRouter = require('./routes/login');
-
+const Auth = require('./units/auth');
 // 景点列表
 const spotList = require('./routes/spotlist');
 const spotdetail = require('./routes/spotdetail');
@@ -32,7 +32,7 @@ const addComment = require('./routes/addComment');
 const addAlbum = require('./routes/addAlbum');
 // 创建服务器
 var server = express();
-server.use('/images',express.static('images'));//将文件设置成静态
+server.use('/images', express.static('images'));//将文件设置成静态
 server.listen(8081);
 
 // 将session加密
@@ -50,22 +50,22 @@ server.use(cors({
 server.use(bodyParser.urlencoded({ extended: false }));
 
 // 配置静态资源目录 server.use(express.static("public"));
-// 测试
+// 需要鉴权的请加上auth拦截器
 server.use("/user", loginRouter);
 server.use("/spotlist", spotList);
 server.use("/spotdetail", spotdetail);
 server.use("/search", search);
-server.use("/my", my);
+server.use("/my", Auth, my);
 server.use("/reg", reg);
 server.use("/imglist", imglist);
-server.use("/collection", collection);
+server.use("/collection", Auth, collection);
 server.use("/hot", hot);
 server.use("/city", city);
-server.use("/saveimg", saveImg);
+server.use("/saveimg", Auth, saveImg);
 server.use("/attDetail", attDetail);
 server.use("/commentlist", comment);
-server.use("/addComment", addComment);
-server.use("/addAlbum", addAlbum);
+server.use("/addComment", Auth, addComment);
+server.use("/addAlbum", Auth, addAlbum);
 
 
 
@@ -81,7 +81,7 @@ const storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage })
-server.post('/upload', upload.array('photos', 5), function (req, res, next) {
+server.post('/upload', Auth, upload.array('photos', 5), function (req, res, next) {
     //console.log(req.files);
     res.send({ code: 0, msg: '上传成功', data: req.files });
 })
