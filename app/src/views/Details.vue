@@ -16,7 +16,7 @@
       <van-tab title="景点评论">
         <div class="comment">
           <div class="top-font">{{msg}}</div>
-          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item" :imgs="imgs"></detailslist>
+          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
           <detailsupload :sid="1"></detailsupload>
         </div>
       </van-tab>
@@ -85,20 +85,6 @@ export default {
           this.commentNum = 0;
         }
         this.msg = res.msg;
-
-        // console.log(res.datas);
-
-        // 分隔图片多个路径
-        for(var item of this.commentDatas){
-          this.imgs.push(item.img);
-        }
-        // var str = this.imgs+"";
-        // var arr = str.split(",").filter((url)=>{
-        //   return url!="";
-        // });
-        // console.log(str.split(","));
-        // console.log(arr);
-        console.log(this.imgs);
       })
     }
   },

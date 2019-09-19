@@ -10,8 +10,10 @@
         </div>
       </div>
       <div class="content">{{item.content}}</div>
+      <div v-if="imgs.length">
       <div class="pic" v-for="(img,index) in imgs" :key="index">
         <img :src="img">
+      </div>
       </div>
       <div class="date">
         <span>{{item.createtime}}</span>
@@ -23,7 +25,15 @@
 export default {
   props: {
     item: { default: Object },
-    imgs:{default:""}
+  },
+  computed:{
+    imgs:function(){
+        if(this.item.img){
+          return this.item.img.split(',');
+        }else{
+          return [];
+        }
+    }
   },
   data() {
     return {};
