@@ -1,10 +1,13 @@
 <template>
   <div class="bottom-bar">
     <div class="image-box">
-      <van-action-sheet v-model="show" title="相册列表-添加图片">
-        <div v-if="isLogin">
-          
+      <van-action-sheet v-model="show" title="相册列表-添加图片" @closed="showAdd = false">
+        <div v-if="isLogin" class="main-list">
           <van-grid :column-num="3">
+            <van-grid-item icon="plus" @click="addAlbum">
+              <van-icon name="plus" class="plus-icon" color="#333" />
+              <div style="margin-top:70px;">新建相册</div>
+            </van-grid-item>
             <van-grid-item v-for="(item,index) of album" icon="plus" :key="index">
               <van-uploader
                 :name="item.id"
@@ -15,10 +18,18 @@
                 :after-read="uploadImg"
               >
                 <van-image :src="item.img" />
-                <van-icon name="plus" class="plus-icon" />
+                <van-icon name="plus" color="#333" class="plus-icon" />
               </van-uploader>
+              <div class="pic-name">{{item.name}}</div>
             </van-grid-item>
           </van-grid>
+          <div class="add-album-box" v-show="showAdd">
+            <van-cell-group>
+              <van-field v-model.trim="albumName" maxlength="5" label="相册名称" placeholder="请输入相册名称" />
+              <van-uploader v-model="albumImg" style="margin:20px;" :max-count="1" />
+              <van-button type="info" @click="saveAlbum" size="large">创建</van-button>
+            </van-cell-group>
+          </div>
         </div>
         <div v-else class="nologin">
           没有登录，请先
@@ -83,7 +94,7 @@
   font-size: 16px;
 }
 .image-box >>> .van-image__img {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 .plus-icon {
   position: absolute;
@@ -94,30 +105,98 @@
   margin-left: -20px;
   margin-top: -20px;
 }
+
+.main-list {
+  min-height: 50vh;
+}
+.main-list >>> .van-grid-item__content--center {
+  margin: 10px;
+}
+.main-list >>> .van-grid-item__content::after {
+  border: 1px solid #ebedf0;
+}
+.add-album {
+  float: left;
+  width: 3.333333rem;
+  height: 3.733333rem;
+}
+.add-album-box {
+  box-sizing: border-box;
+  padding: 0.266667rem;
+  margin-top: 0.566667rem;
+}
 </style>
 <script>
 import qs from "qs";
+import { Dialog } from "vant";
 export default {
   data() {
     return {
       selected: "home",
       show: false,
       isLogin: false,
-      album: []
+      album: [],
+      albumImg: [], //封面
+      albumName: "",
+      showAdd: false
     };
   },
   created() {
-    this.axios
-      .get("/my")
-      .then(res => {
-        if (res.code == 0) {
-          this.isLogin = true;
-          this.album = res.data.result;
-        }
-      })
-      .catch(err => {});
+
+    this.getMy();
   },
   methods: {
+    getMy() {
+      this.axios
+        .get("/my")
+        .then(res => {
+          if (res.code == 0) {
+            this.isLogin = true;
+            this.album = res.data.result;
+          }
+        })
+        .catch(err => {});
+    },
+    addAlbum() {
+      this.showAdd = true;
+    },
+    saveAlbum() {
+      if (this.albumName == "") {
+        Dialog({ message: "请输入相册名称" });
+        return;
+      }
+      if (this.albumImg.length == 0) {
+        Dialog({ message: "请上传相册图片" });
+        return;
+      }
+      var formData = new FormData();
+      formData.append("photos", this.albumImg[0].file);
+      formData.append("title", this.albumName);
+      let config = {
+        //添加请求头
+        headers: { "Content-Type": "multipart/form-data" }
+      };
+      this.axios
+        .post("/upload", formData, config)
+        .then(res => {
+          if (res.code == 0) {
+            let file = res.data[0].destination + res.data[0].filename;
+            let postData = { name: this.albumName, img: file };
+
+            this.axios
+              .post("/addAlbum", qs.stringify(postData))
+              .then(res => {
+                if (res.code == 0) {
+                  this.showAdd = false;
+                  this.getMy();
+                }
+                Dialog({ message: res.msg });
+              })
+              .catch(err => {});
+          }
+        })
+        .catch(err => {});
+    },
     addImage() {
       this.show = true;
     },
@@ -148,10 +227,7 @@ export default {
         this.axios
           .post("/saveimg", qs.stringify({ cid, imgurls }))
           .then(response => {
-            this.$toast({
-              message: "添加成功",
-              position: "bottom"
-            });
+             Dialog({ message: '添加成功' });
           });
       });
     }

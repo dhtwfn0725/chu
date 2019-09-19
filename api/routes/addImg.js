@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../pool');
 const router = express.Router();
+const Config = require('../units/config');
 
 // 注册路由
 router.post("/", (req, res) => {
@@ -22,7 +23,8 @@ router.post("/", (req, res) => {
         } else {
             let values = ``;
             for (let i = 0; i < imgUrl.length; i++) {
-                values += `(${uid},${cid},'${imgUrl[i]}'),`;
+                let temp = Config.domain + imgUrl[i];
+                values += `(${uid},${cid},'${temp}'),`;
             }
             values = values.slice(0, -1);
             sql = `insert into c_user_imgs (user_id,c_id,img) values ${values}`;

@@ -29,8 +29,10 @@ const city = require('./routes/city');
 //  插入图片到用户指定的图集
 const saveImg = require('./routes/addImg');
 const addComment = require('./routes/addComment');
+const addAlbum = require('./routes/addAlbum');
 // 创建服务器
 var server = express();
+server.use('/images',express.static('images'));//将文件设置成静态
 server.listen(8081);
 
 // 将session加密
@@ -48,7 +50,6 @@ server.use(cors({
 server.use(bodyParser.urlencoded({ extended: false }));
 
 // 配置静态资源目录 server.use(express.static("public"));
-
 // 测试
 server.use("/user", loginRouter);
 server.use("/spotlist", spotList);
@@ -64,6 +65,7 @@ server.use("/saveimg", saveImg);
 server.use("/attDetail", attDetail);
 server.use("/commentlist", comment);
 server.use("/addComment", addComment);
+server.use("/addAlbum", addAlbum);
 
 
 
