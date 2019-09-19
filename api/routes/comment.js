@@ -4,7 +4,7 @@ const pool = require("../pool")
 
 router.get("/", (req, res) => {
 	var lid = req.query.lid;
-	console.log("lid:"+lid);
+	// console.log("lid:"+lid);
     var sql = `
 	SELECT
 	a.id,
