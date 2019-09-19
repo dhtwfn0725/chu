@@ -99,6 +99,7 @@ export default {
 .container {
   background-color: #f0f8ff1a;
   overflow: hidden;
+  padding-bottom: 1rem;
   min-height: 100vh;
 }
 /* 头像部分 */
