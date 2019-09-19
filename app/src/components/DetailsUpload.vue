@@ -59,6 +59,7 @@ export default {
         let message = this.message.trim();
         if (message == "") {
           Dialog({ message: "评论内容为空！" });
+          this.canPost = true;
           return;
         }
         let sid = this.sid;
