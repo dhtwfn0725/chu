@@ -1,10 +1,10 @@
 <template>
   <div id="detail">
-    <detailspic v-for="(item,index) in datas" :key="index" :item="item"></detailspic>
+    <detailspic v-for="(item,index) in datas" :key="index" :item="item" :commentNum="commentNum"></detailspic>
     <van-tabs v-model="active" id="bg">
       <van-tab title="景点介绍">
         <div id="main" class="main">
-          <div class="mid-title" id="desc"></div>
+          <div class="mid-title">{{content}}</div>
           <div class="bottom-btn" @click="showImg">景点图片阅览</div>
           <div class="jdyl">
             <van-image-preview v-model="show" :images="images" @change="onChange">
@@ -15,7 +15,7 @@
       </van-tab>
       <van-tab title="景点评论">
         <div class="comment">
-          <div class="top-font">网友评论：</div>
+          <div class="top-font">{{msg}}</div>
           <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
           <detailsupload :sid="1"></detailsupload>
         </div>
@@ -38,8 +38,11 @@ export default {
       index: 0,
       images: [],
       datas: [],
-      jdid: "",
-      commentDatas:[]
+      lid: "",
+      commentDatas:[],
+      msg:"",
+      content:"",
+      commentNum:0
     };
   },
   components: {
@@ -63,24 +66,38 @@ export default {
         //   这个传参方式怎么这么low?
       var url = location.href;
       // console.log(url);
-      this.jdid = url.split("?")[1].split("=")[1];
+      this.lid = url.split("?")[1].split("=")[1];
       // console.log(this.jdid);
 
-      // 调用景点详情接口  为什么都不看接口文档呢？
-      this.axios.get(`/attDetail?jdid=${this.jdid}`).then(res => {
+      // 调用景点详情接口
+      this.axios.get(`/attDetail?lid=${this.lid}`).then(res => {
         if (res.length > 0) {
           this.datas = res;
           // console.log(res);
-          desc.innerHTML = res[0].desc;  // 为什么要操作DOM
+          this.content = this.datas[0].content
         }
       });
 
       // 调用评论相关信息接口
-      this.axios.get("/commentlist").then(res=>{
-        if(res.length>0){
-          this.commentDatas = res;
-          console.log(res);
+      this.axios.get(`/commentlist?lid=${this.lid}`).then(res=>{
+        if(res.code===1){
+          this.msg = res.msg;
+          // console.log("res.datas:"+res.datas);
+          this.commentDatas = res.datas;
+          // console.log(res.datas.length);
+          // topFont.innerHTML = res.msg;
+        }else if (res.code===-1){
+          this.msg = res.msg;
         }
+        // console.log(res);
+        this.msg = res.msg;
+        this.commentNum = res.datas.length;
+        console.log(this.commentNum);
+        // if(res.length>0){
+        //   this.commentDatas = res;
+        //   console.log(res);
+        // }
+        // topFont.innerHTML = res.msg;
       })
     }
   },

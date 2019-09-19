@@ -16,7 +16,7 @@
           <img src="/images/r2.jpg" />
         </div> -->
         <div class="item num">
-          <span>+{{item.comment_num}}</span>
+          <span>+{{commentNum}}</span>
         </div>
         <div class="item text">
           <span>条评论</span>
@@ -32,7 +32,8 @@
 <script>
 export default {
   props:{
-    item:{default:Object}
+    item:{default:Object},
+    commentNum:{default:0}
   },
   data() {
     return {
