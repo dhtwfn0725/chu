@@ -16,7 +16,7 @@
       <van-tab title="景点评论">
         <div class="comment">
           <div class="top-font">{{msg}}</div>
-          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
+          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item" :imgs="imgs"></detailslist>
           <detailsupload :sid="1"></detailsupload>
         </div>
       </van-tab>
@@ -42,7 +42,8 @@ export default {
       commentDatas:[],
       msg:"",
       content:"",
-      commentNum:0
+      commentNum:0,
+      imgs:[]
     };
   },
   components: {
@@ -82,22 +83,27 @@ export default {
       this.axios.get(`/commentlist?lid=${this.lid}`).then(res=>{
         if(res.code===1){
           this.msg = res.msg;
-          // console.log("res.datas:"+res.datas);
           this.commentDatas = res.datas;
-          // console.log(res.datas.length);
-          // topFont.innerHTML = res.msg;
+          this.commentNum = res.datas.length;
         }else if (res.code===-1){
           this.msg = res.msg;
+          this.commentNum = 0;
         }
-        // console.log(res);
         this.msg = res.msg;
-        this.commentNum = res.datas.length;
-        console.log(this.commentNum);
-        // if(res.length>0){
-        //   this.commentDatas = res;
-        //   console.log(res);
-        // }
-        // topFont.innerHTML = res.msg;
+
+        // console.log(res.datas);
+
+        // 分隔图片多个路径
+        for(var item of this.commentDatas){
+          this.imgs.push(item.img);
+        }
+        // var str = this.imgs+"";
+        // var arr = str.split(",").filter((url)=>{
+        //   return url!="";
+        // });
+        // console.log(str.split(","));
+        // console.log(arr);
+        console.log(this.imgs);
       })
     }
   },

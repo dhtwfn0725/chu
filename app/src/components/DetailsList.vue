@@ -10,12 +10,8 @@
         </div>
       </div>
       <div class="content">{{item.content}}</div>
-      <div class="pic">
-        <img src="/images/h2.jpg" />
-        <img src="/images/h1.jpg" />
-        <img src="/images/h1.jpg" />
-        <img src="/images/h1.jpg" />
-        <img src="/images/h1.jpg" />
+      <div class="pic" v-for="(img,index) in imgs" :key="index">
+        <img :src="img">
       </div>
       <div class="date">
         <span>{{item.createtime}}</span>
@@ -26,7 +22,8 @@
 <script>
 export default {
   props: {
-    item: { default: Object }
+    item: { default: Object },
+    imgs:{default:""}
   },
   data() {
     return {};

@@ -6,10 +6,6 @@ router.get("/", (req, res) => {
 
     var lid = req.query.lid;
     console.log(lid);
-	var datas = {
-		attDetails:{},
-		commentAvatar:[]	//评论用户头像
-	}
     var sql = `
   SELECT
 	* 
