@@ -3,11 +3,15 @@
     <!-- 头像部分 -->
     <div class="head">
       <div class="head_pic">
-        <img src="/images/my_head.png" class="head_img">
+        <img :src="uhead" class="head_img">
       </div>
-      <div class="head_text">
-        <span class="head_id">菜鸡网_菜鸡沈</span>
-        <span class="head_email">5555555@qq.com</span>
+      <div class="head_text" v-if="show">
+        <span class="head_id">{{uid}}</span>
+        <span class="head_email">{{uemail}}</span>
+      </div>
+      <div class="head_text" v-else @click="jumpLogin">
+        <span class="head_id">请点击此处进行登录</span>
+        <span class="head_email">当前状态未登录</span>
       </div>
     </div>
     <!-- 卡片部分 -->
@@ -41,7 +45,8 @@
         </div>
       </div>
     </div>
-
+    <!-- 占位div -->
+    <div class="zhan"></div>
      <div>
        <bottom-bar></bottom-bar>
      </div>
@@ -58,12 +63,17 @@ export default {
       disc:"0",
       atte:"0",
       // data 留空
-      data: []
+      data: [],
+      uid:"",
+      uemail:"",
+      uhead:"/images/my_head.png",
+      show:false
     }
   },
   created(){
-    console.log(123);
+    //console.log(123);
     this.load()
+    
   },
   methods: {
     load(){
@@ -74,21 +84,27 @@ export default {
         if(res.code==-1){
           this.$messagebox("消息","亲，请先登录呢~")
           // 这里不要跳转到登录，否则用户退不回来了
-          this.$router.push('/login')
         }
         // 如果登录成功
         if(res.code==0){
           console.log(res.data)
           this.albums=res.data;
-          this.pics=this.albums.pic_num;
-          this.disc=this.albums.comment_num;
-          this.atte=this.albums.collect_num;
-          this.data=this.albums.result
+          this.pics=res.data.pic_num;
+          this.disc=res.data.comment_num;
+          this.atte=res.data.collect_num;
+          this.data=res.data.result;
+          this.uid=res.data.user.nickname;
+          this.uemail=res.data.user.email;
+          this.uhead=res.data.user.avatar;
+          this.show=true;
         }
       })
     },
     toAlbum(){
       this.$router.push('/myAlbum')
+    },
+    jumpLogin(){
+      this.$router.push('/login')
     }
   },
   components:{
@@ -100,7 +116,6 @@ export default {
 .container {
   background-color: #f0f8ff1a;
   overflow: hidden;
-  padding-bottom: 1rem;
   min-height: 100vh;
 }
 /* 头像部分 */
@@ -184,6 +199,9 @@ export default {
   margin:.45rem .05rem;
   font:bold 20px "华文新魏","华文宋体","新宋体";
 
+}
+.zhan{
+  height:1.25rem
 }
 
 </style>
