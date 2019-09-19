@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../pool');
 const router = express.Router();
+const Config = require('../units/config');
 
 // 注册路由
 router.post("/", (req, res) => {
@@ -25,8 +26,9 @@ router.post("/", (req, res) => {
         if (rs.length != 0) {
             res.send({ code: -1, msg: '用户名已占用', data: [] });
         } else {
-            sql = `insert into c_user (username,password,avatar,nickname) values (?,?,'images/album1.png',?)`;
-            pool.query(sql, [uname, upwd, uname], (err, result) => {
+            let avatar = Config.domain + 'images/album1.png';
+            sql = `insert into c_user (username,password,avatar,nickname) values (?,?,?,?)`;
+            pool.query(sql, [uname, upwd,avatar, uname], (err, result) => {
                 if (err)
                     throw err;
                 res.send({ code: 0, msg: '注册成功', data: [] });
