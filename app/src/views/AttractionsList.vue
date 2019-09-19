@@ -25,7 +25,7 @@
 <script>
 // import attlist from '../assets/json/attlist.json'
 import BottomBar from "@/components/BottomBar.vue";
-import CardItem from "@/components/CardItem.vue";
+import CardItem from "../components/CardItem.vue";
 import Search from "@/components/Search.vue";
 
 import Vue from "vue";
@@ -83,8 +83,17 @@ export default {
         this.isLoading = false;
       },800);
     },
+    init(){
+      this.title = this.$route.query.keyword==undefined||''?"":this.$route.query.keyword;
+      this.axios.get(`/search?title=${this.title}&page=${this.page}`).then(rs=>{
+        this.datas = rs;
+      });
+    },
 
-  }
+  },
+  created() {
+    this.init();
+  },
   
 }
 </script>

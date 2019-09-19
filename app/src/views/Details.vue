@@ -64,12 +64,7 @@ export default {
       });
     },
     init() {
-        //   这个传参方式怎么这么low?
-      var url = location.href;
-      // console.log(url);
-      this.lid = url.split("?")[1].split("=")[1];
-      // console.log(this.jdid);
-
+      this.lid = this.$route.query.lid;
       // 调用景点详情接口
       this.axios.get(`/attDetail?lid=${this.lid}`).then(res => {
         if (res.length > 0) {

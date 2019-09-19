@@ -2,7 +2,7 @@
   <div class="search">
     <div class="input_search">
       <img src="images/search.png" @click="search">
-      <input type="text" v-model="keyword" placeholder="搜索景点名称">
+      <input type="text" v-model="keyword" placeholder="搜索景点名称" @keyup.enter="search">
     </div>
   </div>
 </template>
@@ -16,9 +16,13 @@ export default {
   },
   methods:{
     search(){
+      console.log(11111);
       if(this.keyword == ''){
         this.$toast('请输入景点名称关键字');
         return;
+      }
+      if(this.keyword){
+        this.$router.push({path:"/attlist",query:{keyword:this.keyword}});
       }
     }
   }
