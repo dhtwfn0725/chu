@@ -1,7 +1,7 @@
 <template>
   <div class="upload">
     <van-action-sheet v-model="show" title="添加评论">
-      <div class="hide">
+      <div class="hide" v-if="isLogin">
         <div class="textarea">
           <van-cell-group>
             <van-field
@@ -17,69 +17,107 @@
           </van-cell-group>
         </div>
         <div class="upload-img">
-          <!-- <van-uploader v-model="fileList" :after-read="afterRead" @delete="delImg" multiple :max-count="5" /> -->
           <div class="posting-uploader">
-            <span v-for="(item,nn) in fileList" :key="nn">
-              <img :src="item.content" width="80" height="80" class="uploadimg" />
-              <van-icon name="close" @click="delImg(nn)" class="delte" />
-            </span>
-            <van-uploader v-model="fileList" :preview-image="false" :after-read="afterRead" :accept="'image/*'" multiple :max-count="5" >
-            </van-uploader>
+            <van-uploader
+              v-model="fileList"
+              :after-read="afterRead"
+              :accept="'image/*'"
+              multiple
+              :max-count="5"
+            ></van-uploader>
           </div>
         </div>
-        <div class="upda">提交</div>
+        <div class="upda" @click="submitComment">提交</div>
+      </div>
+      <div v-else class="login-box">
+         您还没有登录，
+         <router-link to="/login">马上登录</router-link>
       </div>
     </van-action-sheet>
     <div class="bottom-btn" @click="isShow">添加评论</div>
   </div>
 </template>
 <script>
+import { Dialog } from "vant";
+import qs from 'qs'
 export default {
   data() {
     return {
       show: false,
       fileList: [],
       message: "",
+      canPost: true,
+      isLogin:false
     };
   },
   props: ["sid"],
   methods: {
+    submitComment() {
+      if (this.canPost) {
+        this.canPost = false;
+
+        let message = this.message.trim();
+        if (message == "") {
+          Dialog({ message: "评论内容为空！" });
+          return;
+        }
+        let sid = this.sid;
+        //  上传图片
+        let fileList = this.fileList;
+        var formData = new FormData();
+        for (let i = 0; i < fileList.length; i++) {
+          formData.append("photos", fileList[i].file);
+        }
+
+        let config = {
+          headers: { "Content-Type": "multipart/form-data" }
+        };
+
+        this.axios.post("/upload", formData, config).then(response => {
+          let ret = response.data;
+          let imgs = []; // 保存返回图片路径
+          for (let i = 0; i < ret.length; i++) {
+            imgs.push(ret[i].destination + ret[i].filename);
+          }
+          imgs = imgs.toString()
+          //  保存评论
+          let postData = { content: message, sid, imgs };
+          this.axios
+            .post("/addComment", qs.stringify(postData))
+            .then(response => {
+              Dialog({ message: response.msg });
+              //  实际上还需要触发事件
+              this.show = false;
+              this.canPost = true;
+            })
+            .catch(err => {});
+        });
+      }
+    },
     isShow() {
       this.show = true;
     },
     delImg(n) {
-      console.log(n)
+      console.log(n);
     },
     afterRead(files) {
-      console.log(files);
-      if (!(files instanceof Array)) {
-        files = [files];
-      }
-      // todo
-      return;
-      var formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append("photos", files[i].file);
-      }
-      console.log(formData.get("file"));
-      let config = {
-        headers: { "Content-Type": "multipart/form-data" }
-      };
-
-      this.axios.post("/upload", formData, config).then(response => {
-        let ret = response.data;
-        let cid = this.sid;
-        console.log(ret);
-        for (let i = 0; i < ret.length; i++) {
-          this.fileList.push(ret[i].destination + ret[i].filename);
-        }
-        console.log(this.fileList);
-      });
+      console.log(this.fileList);
     }
+  },
+  created(){
+    this.axios.get('/my').then(res=>{
+        // 判断是否登录状态
+        if(res.code == 0){
+            this.isLogin = true
+        }
+      })
   }
 };
 </script>
 <style scoped>
+.toast-index {
+  z-index: 999;
+}
 .textarea >>> .van-field__body textarea {
   border: 1px dashed #ccc;
   padding: 0.133333rem;
@@ -119,5 +157,10 @@ export default {
 .van-action-sheet__close {
   left: 0;
   right: auto;
+}
+.login-box {
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
 }
 </style>
