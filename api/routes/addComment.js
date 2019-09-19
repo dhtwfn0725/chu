@@ -18,6 +18,9 @@ router.post("/", (req, res) => {
     pool.query(sql, [content, imgs,uid,sid], (err, ret) => {
         if (err)
             throw err;
+        // 新增评论次数
+        let sql = `UPDATE c_scenic_spot SET comment_num=comment_num+1 where id=${sid}`;
+        pool.query(sql);
         res.send({ code: 0, msg: '评论成功', data: [] })    
     })
 });

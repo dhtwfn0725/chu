@@ -16,7 +16,7 @@
       <van-tab title="景点评论">
         <div class="comment">
           <div class="top-font">{{msg}}</div>
-          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item" :imgs="item.img"></detailslist>
+          <detailslist v-for="(item,index) of commentDatas" :key="index" class="footer-margin" :item="item"></detailslist>
           <detailsupload :sid="1"></detailsupload>
         </div>
       </van-tab>
