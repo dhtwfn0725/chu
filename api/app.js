@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const session = require('express-session');
-
+const Tool = require('./units/tool.js');
 const loginRouter = require('./routes/login');
 
 // 景点列表
@@ -28,7 +28,7 @@ const city = require('./routes/city');
 
 //  插入图片到用户指定的图集
 const saveImg = require('./routes/addImg');
-
+const addComment = require('./routes/addComment');
 // 创建服务器
 var server = express();
 server.listen(8081);
@@ -57,12 +57,15 @@ server.use("/search", search);
 server.use("/my", my);
 server.use("/reg", reg);
 server.use("/imglist", imglist);
-server.use("/collection",collection);
+server.use("/collection", collection);
 server.use("/hot", hot);
 server.use("/city", city);
 server.use("/saveimg", saveImg);
-server.use("/attDetail",attDetail);
-server.use("/commentlist",comment);
+server.use("/attDetail", attDetail);
+server.use("/commentlist", comment);
+server.use("/addComment", addComment);
+
+
 
 var multer = require('multer')
 const storage = multer.diskStorage({
@@ -72,11 +75,11 @@ const storage = multer.diskStorage({
     },
     filename(req, file, cb) {
         const filenameArr = file.originalname.split('.');
-        cb(null, filenameArr[0] + Date.now() + '.' + filenameArr[filenameArr.length - 1]);
+        cb(null, Tool.randNum(100000) + '' + Date.now() + '.' + filenameArr[filenameArr.length - 1]);
     }
 });
 var upload = multer({ storage })
 server.post('/upload', upload.array('photos', 5), function (req, res, next) {
-    console.log(req.files);
+    //console.log(req.files);
     res.send({ code: 0, msg: '上传成功', data: req.files });
 })

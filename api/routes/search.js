@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     var page = req.query.page;
     var pageSize = 5;
     var offset = (page-1) * pageSize;
-    console.log(page);
+    //console.log(page);
     var sql1 = `select * from c_scenic_spot where title like "%${title}%" limit ${offset},${pageSize}`;
     pool.query(sql1,(err, result) => {
         if (err) {
