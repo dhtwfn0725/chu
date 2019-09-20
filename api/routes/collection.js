@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
     pool.query(sql,[uid],(err, result) => {
         if (err) throw err;
         if(result.length==0){
-            res.send({code:-2,msg:"找到0条相关收藏记录"})
+            res.send({code:-2,msg:"暂无收藏记录"})
         }else{
             res.send({code:1,msg:`找到${result.length}条相关收藏记录`,data:result});
         }
