@@ -1,7 +1,7 @@
 <template>
   <div class="my-album" >
     <!-- 上传图片跳转 -->
-    <van-button type="info" size="large" icon="/images/icon_cam.png" class="up_btn" @click="ulp">上传照片/视频</van-button>
+    <van-button type="info" size="large" icon="/images/icon_cam.png" class="up_btn" @click="btnClick">上传照片/视频</van-button>
     
     <div v-for="(item,index) in list" :key="index" class="albun_block">
       <!-- 日期 -->
@@ -9,60 +9,144 @@
       <!-- 图片 -->
       <div class="album_div">
         <div class="album_pic" v-for="(item,i) in list[index].imgs" :key="i">
-          <img :src="item" style="object-fit: cover" class="album_pics">
+          <img :src="item" style="object-fit: cover" class="album_pics" @click="preview">
         </div>
       </div>
     </div>
-  <!-- 测试 -->
-  <van-dialog v-model="show" show-cancel-button :beforeClose="beforeClose" title="照片/视频上传">
-    <van-field
-        label="用户名"
-        placeholder="请输入姓名"/>
-  </van-dialog>
+
+
+    <!-- 测试 上传部分-->
+    <van-dialog v-model="show" show-cancel-button :beforeClose="beforeClose" title="照片/视频上传" confirmButtonText="上传" class="upl">
+      <!-- <div class="upl1"> -->
+
+        <!-- 上传组件 -->
+        <van-uploader :after-read="afterRead" v-model="fileList" multiple :max-count="9" class="upl2"/>
+
+      <!-- </div> -->
+
+    </van-dialog>
 
   </div>
 </template>
 
 <script>
-import { Dialog } from 'vant';
+import { Dialog,Toast,ImagePreview } from 'vant';
+
+import qs from 'qs';
 
 export default {
   data() {
     return {
-      list:[
-        {date:"2019-03-12",imgs:["/images/h1.jpg","/images/h1.jpg","/images/h1.jpg","images/h1.jpg"]},
-        {date:"2019-03-29",imgs:["/images/h1.jpg","/images/h1.jpg"]}
+      cid:"",
+      list:[],
+      show:false,
+      fileList:[
+        // Uploader 根据文件后缀来判断是否为图片文件
+        // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
         ],
-        show:false
+    
+      canClick:true
     }
   },
   methods: {
+    //图片预览
+    preview(){
+      ImagePreview(this.pres);
+    },
+    
+    // 文件上传完触发
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      // console.log(file);
+    },
+    // 选完以后调用axios发送图片给服务器
+    uploadPics(){
+      let fileList = this.fileList;
+      var formData = new FormData()
+    },
     load(){
       // console.log(this.$route)
       var url="/imglist";
+      this.cid=this.$route.query.cid
       this.axios.get(url,{params:{
-        cid:this.$route.query.cid
+        cid:this.cid
       }})
       .then(res=>{
         if(res.code==0){
-          console.log(res.data)
+          // console.log(res.data)
           this.list=res.data;
         }else if(res.code==-1){
           this.$messagebox("消息",`啊哦，${res.msg}好像出错了~`)
         }
       })
     },
-    ulp(){
+    btnClick(){
       this.show=!this.show;
     },
     beforeClose(action, done){
-      console.log('关闭')
-      done()
+      if(action=="confirm"){
+        if(this.fileList==0){
+          Toast('请先选择图片')
+          done(false)
+        }
+        // 上传图片
+        let fileList = this.fileList;
+        var formData = new FormData();
+        for (let i = 0; i < fileList.length; i++) {
+          formData.append("photos", fileList[i].file);
+        }
+
+        let config = {
+          headers: { "Content-Type": "multipart/form-data" }
+        };
+
+        if(this.canClick){
+          this.canClick==false;
+          this.axios.post("/upload", formData, config).then(response => {
+            let ret = response.data;
+            let imgs = []; // 保存返回图片路径
+            for (let i = 0; i < ret.length; i++) {
+              imgs.push(ret[i].destination + ret[i].filename);
+            }
+            imgs = imgs.toString()
+            // 传参数 
+            let postData = { imgurls:imgs,cid:this.cid };
+            this.axios
+              .post("/saveimg", qs.stringify(postData))
+              .then(response => {
+                this.canClick=true;
+                Dialog.alert({ message: response.msg }).then(
+                  ()=>{
+                      this.load()
+                      done()
+                      this.fileList=[]
+                  }
+                )
+              })
+              .catch(err => {});
+          });
+        }
+      }
+        if(action="cancel"){
+          done()
+        }
     },
 
   },
+  computed:{
+    pres(){
+      var a=[]
+      for(var pics of this.list){
+        if(pics.imgs.length>0){
+          a=a.concat(pics.imgs)
+        }
+      }
+      return a
+    }
+  },
   created(){
-    this.load()  
+    this.load() 
+    // console.log(this.list)
   },
   components: {
     [Dialog.Component.name]: Dialog.Component
@@ -107,5 +191,5 @@ export default {
 
 
   /* 测试 */
-  
+ 
 </style>
