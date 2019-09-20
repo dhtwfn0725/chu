@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>收藏景点列表</h2>
+    <div class="container">
+        <!-- <h2>收藏景点列表</h2> -->
         <h4>{{msg}}</h4>
         <card-item
             v-for="(item,index) of datas"
@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-    import BottomBar from "@/components/BottomBar.vue";
+    import BottomBar from "../components/BottomBar.vue";
     import CardItem from "@/components/CardItem.vue";
 
     export default {
@@ -18,8 +18,8 @@
             return {datas: [], page: 0, msg: ""}
         },
         components: {
-            BottomBar,
-            CardItem
+            "bottom-bar":BottomBar,
+            "card-item":CardItem
         },
         methods: {
             init() {
@@ -46,6 +46,7 @@
                                 .concat(rs.data);
                             this.datas = rows;
                         }
+                        console.log(this.datas);
                     })
             }
         },
@@ -54,3 +55,14 @@
         }
     }
 </script>
+<style scoped>
+    .container{
+        background-color: #ebecec;
+        padding-top: 8px;
+        padding-bottom: 20%;
+    }
+    .container>h4{
+        padding-left: 5%;
+        box-shadow: 5px 5px 5px 0px #888888;
+    }
+</style>

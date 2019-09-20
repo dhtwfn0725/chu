@@ -100,7 +100,7 @@ export default {
 <style scoped="scoped">
 /* 整体样式 */
 .container {
-  background-color: #f0f8ff1a;
+  background-color: #ebecec;
   overflow: hidden;
 }
 /* 顶部样式 */
@@ -111,7 +111,11 @@ export default {
   padding-right: 0.533333rem;
   padding-left: 0.533333rem;
 }
-
+.header_top>h2{
+  box-shadow: 0px 0px 20px 0px black;
+  font-family:华文行楷;
+  border-radius: 5px;
+}
 .header_top > span {
   padding-top: 0.133333rem;
 }

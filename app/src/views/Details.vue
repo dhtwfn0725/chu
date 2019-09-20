@@ -1,6 +1,10 @@
 <template>
   <div id="detail">
-    <detailspic v-for="(item,index) in datas" :key="index" :item="item" :commentNum="commentNum"></detailspic>
+    <div class="header-top">
+      <van-icon name="arrow-left" size="20px" @click="back"/>
+      <span>返回</span>
+    </div>
+    <detailspic :key="index" :item="datas[0]" :commentNum="commentNum"></detailspic>
     <van-tabs v-model="active" id="bg">
       <van-tab title="景点介绍">
         <div id="main" class="main">
@@ -63,6 +67,10 @@ export default {
         startPosition: 0,
       });
     },
+    back(){
+      console.log(11111111);
+      this.$router.back();
+    },
     init() {
       this.lid = this.$route.query.lid;
       // 调用景点详情接口
@@ -96,7 +104,6 @@ export default {
 <style scoped>
 #detail {
   background-color: #ebecec !important;
-  padding-top: 0.133333rem;
   padding-bottom: 0.533rem;
 }
 #main {
@@ -153,5 +160,17 @@ export default {
 }
 .van-tabs >>> .van-tabs__wrap > .van-tabs__nav {
   background-color: #ebecec;
+}
+
+.header-top>div{
+  background: transparent;
+}
+.header-top{
+  padding: 10px;
+}
+.header-top>span{
+  font-size: .333333rem;
+  position: relative;
+  top: -5px;
 }
 </style>
