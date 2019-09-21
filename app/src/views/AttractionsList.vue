@@ -4,7 +4,7 @@
       <div class="header_top">
         <h2>景点列表</h2>
       </div>
-      <div class="search">
+      <div class="search"  @keyup.enter="init">
         <search></search>
       </div>
 
@@ -26,7 +26,7 @@
 // import attlist from '../assets/json/attlist.json'
 import BottomBar from "@/components/BottomBar.vue";
 import CardItem from "../components/CardItem.vue";
-import Search from "@/components/Search.vue";
+import Search from "../components/Search.vue";
 
 import Vue from "vue";
 import { Loadmore } from "mint-ui";
@@ -84,9 +84,12 @@ export default {
       },800);
     },
     init(){
-      this.title = this.$route.query.keyword==undefined||''?"":this.$route.query.keyword;
+      this.page = 1;
+      this.title = this.$route.query.keyword==undefined?"":this.$route.query.keyword;
+      // console.log(this.title);
       this.axios.get(`/search?title=${this.title}&page=${this.page}`).then(rs=>{
         this.datas = rs;
+        console.log(rs);
       });
     },
 
