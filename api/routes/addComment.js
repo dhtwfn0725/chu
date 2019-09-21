@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
         return;
     }
 
-    imgs = imgs.replace('images/',Config.domain + 'images/');
+    imgs = imgs.replace(/images/g,Config.domain + 'images');
     let sql = `insert into c_scenic_comment (content,img,user_id,scenic_spot_id) values (?,?,?,?)`;
     pool.query(sql, [content, imgs,uid,sid], (err, ret) => {
         if (err)
