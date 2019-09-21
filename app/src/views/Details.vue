@@ -4,14 +4,14 @@
       <van-icon name="arrow-left" size="20px" @click="back"/>
       <span>返回</span>
     </div>
-    <detailspic :key="index" :item="datas[0]" :commentNum="commentNum"></detailspic>
+    <detailspic :key="index" :item="datas" :commentNum="commentNum"></detailspic>
     <van-tabs v-model="active" id="bg">
       <van-tab title="景点介绍">
         <div id="main" class="main">
           <div class="mid-title">{{content}}</div>
           <div class="bottom-btn" @click="showImg">景点图片阅览</div>
           <div class="jdyl">
-            <van-image-preview v-model="show" :images="images" @change="onChange">
+            <van-image-preview :key="index" v-model="show" :images="images" @change="onChange">
               <template v-slot:index>第{{ index }}页</template>
             </van-image-preview>
           </div>
@@ -46,8 +46,7 @@ export default {
       commentDatas:[],
       msg:"",
       content:"",
-      commentNum:0,
-      imgs:[]
+      commentNum:0
     };
   },
   components: {
@@ -63,23 +62,26 @@ export default {
       // console.log(this.datas[0].img);
       Vue.use(ImagePreview);
       ImagePreview({
-        images: [this.datas[0].img],
+        images: this.images,
         startPosition: 0,
       });
     },
     back(){
-      console.log(11111111);
+      // console.log(11111111);
       this.$router.back();
     },
     init() {
       this.lid = this.$route.query.lid;
       // 调用景点详情接口
-      this.axios.get(`/attDetail?lid=${this.lid}`).then(res => {
-        if (res.length > 0) {
+      
+      this.axios.get(`/spotdetail?id=${this.lid}`).then(res => {
           this.datas = res;
+          this.content = this.datas.content;
+          for(var i=0;i<this.datas.images.length;i++){
+            this.images.push(this.datas.images[i].img);
+          }
           // console.log(res);
-          this.content = this.datas[0].content
-        }
+          // console.log(this.images);
       });
 
       // 调用评论相关信息接口
