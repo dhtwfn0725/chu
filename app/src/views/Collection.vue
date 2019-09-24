@@ -76,7 +76,6 @@
                                 .concat(rs.data);
                             this.datas = rows;
                         }
-                        console.log(this.datas);
                     })
                 
             }

@@ -11,20 +11,16 @@
 export default {
   data(){
     return {
-      keyword:''
+        keyword:''
     }
   },
   methods:{
     search(){
-      console.log(11111);
-      if(this.keyword == ''){
-        this.$toast('请输入景点名称关键字');
-        return;
-      }
-      if(this.keyword){
-        this.$router.push({path:"/attlist",query:{keyword:this.keyword}});
-      }
+      this.$emit('search',this.keyword);
     }
+  },
+  created(){
+    this.keyword = this.$route.query.keyword;
   }
 };
 </script>

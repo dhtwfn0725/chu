@@ -1,15 +1,31 @@
 <template>
   <div class="login">
-    <div class="top">
-      <h2>欢迎注册</h2>
-      <p>请在下方输入你的注册信息</p>
+    <div class="title">
+      <p>欢迎注册</p>
+      <p>请在下方输入您的注册信息</p>
     </div>
     <div class="form">
       <div class="section">
-        <van-cell-group>
-          <van-field v-model="uname" required clearable label="用户名" placeholder="请输入用户名" />
-          <van-field v-model="upwd" type="password" label="密码" placeholder="请输入密码" required />
-        </van-cell-group>
+        <van-field
+          v-model="uname"
+          class="uname"
+          label-width="50" 
+          left-icon="manager"
+          type="text"
+          label="用户名"
+          placeholder="请输入用户名"
+          required
+        />
+        <van-field
+          v-model="upwd"
+          class="upwd"
+          label-width="50" 
+          left-icon="eye"
+          type="password"
+          label="密码"
+          placeholder="请输入密码"
+          required
+        />
         <div class="submit" @click="reg">
           <span>注 册</span>
         </div>
@@ -19,7 +35,7 @@
         <p>
           已有账号，
           <router-link to="/login">
-          <span style="color:#83a0fa">立即登录</span>
+            <span style="color:#83a0fa">立即登录</span>
           </router-link>
         </p>
       </div>
@@ -62,7 +78,7 @@ export default {
           this.$toast(rs.msg);
           if (rs.code == 0) {
             this.$router.push({ path: "/login" });
-          } 
+          }
         })
         .catch(err => {
           throw err;
@@ -76,29 +92,43 @@ export default {
 .login {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-color: #f00; */
+  background: url("/images/login_bg.png") no-repeat center;
+  background-size: cover;
 }
-.top {
-  margin-top: 0.4rem;
-}
-.top > h2 {
+.title {
   text-align: center;
-  font-size: 0.6rem;
-}
-.top > p {
-  color: #80899a;
-  text-align: center;
-}
-.submit {
-  width: 100%;
+  font-size: 18px;
   color: #fff;
-  height: 1.2rem;
-  line-height: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+.form {
+  width: 85%;
+  margin: 0 auto;
+}
+.uname {
+  margin-bottom: 0.466667rem;
+}
+.uname .van-icon,
+.upwd .van-icon {
+  color: #2d3496;
+}
+.submit span {
+  display: block;
+  width: 100%;
+  margin-top: 0.466667rem;
+  background-color: #6c55ff;
+  height: 1.173333rem;
+  line-height: 1.173333rem;
   text-align: center;
-  font-size: 14px;
-  background-color: #83a0fa;
+  font-size: 16px;
+  color: #fff;
 }
 .bottom {
+  color: #fff;
   text-align: center;
 }
 </style>

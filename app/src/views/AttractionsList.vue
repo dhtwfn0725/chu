@@ -4,17 +4,13 @@
       <div class="header_top">
         <h2>景点列表</h2>
       </div>
-      <div class="search"  @keyup.enter="init">
-        <search></search>
-      </div>
-
+      <search @search="getData" :keyword="title"></search>
       <!-- 上拉加载更多 -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="list_body">
           <card-item v-for="(item,index) of datas" :key="index" :item="item"></card-item>
         </div>
       </van-list>
-
     </van-pull-refresh>
     <div style="width:100%;height:100px;"></div>
     <div class="att_foot">
@@ -50,6 +46,12 @@ export default {
     Search
   },
   methods: {
+    getData(keyword){
+       this.page = 1;
+       this.datas = [];
+       this.title = keyword;
+       this.onLoad();
+    },
     // 下拉加载更多数据
     onLoad() {
       // 异步更新数据
@@ -84,18 +86,20 @@ export default {
       },800);
     },
     init(){
-      this.page = 1;
-      this.title = this.$route.query.keyword==undefined?"":this.$route.query.keyword;
-      // console.log(this.title);
-      this.axios.get(`/search?title=${this.title}&page=${this.page}`).then(rs=>{
+      this.axios
+      .get(`/search?title=${this.title}&page=${this.page}`)
+      .then(rs => {
         this.datas = rs;
-        console.log(rs);
       });
     },
 
   },
   created() {
-    this.init();
+    let keyword = this.$route.query.keyword;
+    //console.log(keyword)
+    if(keyword != null){
+        this.title = keyword;
+    }
   },
   
 }
@@ -116,7 +120,7 @@ export default {
 }
 .header_top>h2{
   box-shadow: 0px 0px 20px 0px black;
-  font-family:华文行楷;
+  font-family:'微软雅黑';
   border-radius: 5px;
 }
 .header_top > span {

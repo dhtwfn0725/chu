@@ -87,7 +87,6 @@ export default {
         }
         // 如果登录成功
         if(res.code==0){
-          console.log(res.data)
           this.albums=res.data;
           this.pics=res.data.pic_num;
           this.disc=res.data.comment_num;

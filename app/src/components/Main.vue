@@ -2,7 +2,7 @@
   <div class="main-item">
     <h1 class="title">楚游，说走就走的旅行</h1>
     <div class="search">
-      <search></search>
+      <search @search="getData"></search>
     </div>
     <div class="slider">
       <slider :list="cityList"></slider>
@@ -81,8 +81,6 @@
 import Slider from "@/components/Slider.vue";
 import CardItem from "@/components/CardItem.vue";
 import Search from "@/components/Search.vue";
-// import attlist from '../assets/json/attlist.json'
-
 export default {
   components: {
     Slider,
@@ -95,12 +93,15 @@ export default {
       page: 0,
       loading: false,
       finished: false,
-      cityList: []
+      cityList: [],
+      keyword:''
     };
   },
   methods: {
+    getData(keyword){
+      this.$router.push({path:"/attlist",query:{keyword}});
+    },
     getList() {
-      console.log(this.loading);
       this.page++;
       let url = "/hot?page=" + this.page;
       this.axios.get(url).then(res => {
