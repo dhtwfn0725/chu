@@ -12,6 +12,7 @@ import axios from 'axios';
 
 
 axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'http://47.240.27.79:8081';
 axios.defaults.baseURL = 'http://127.0.0.1:8081';
 
 // 添加响应拦截器   
@@ -31,7 +32,11 @@ Vue.use(Vant);
 
 Vue.use(Mint);
 
-
+axios.get('/my').then(res=>{
+  if(res.code == 0){
+      store.commit('setInfo',res.data);
+  }
+})
 new Vue({
   router,
   store,

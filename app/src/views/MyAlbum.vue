@@ -84,10 +84,12 @@ export default {
       this.show=!this.show;
     },
     beforeClose(action, done){
+
       if(action=="confirm"){
         if(this.fileList==0){
           Toast('请先选择图片')
-          done(false)
+          done(false);
+          return;
         }
         // 上传图片
         let fileList = this.fileList;
@@ -126,10 +128,10 @@ export default {
               .catch(err => {});
           });
         }
+      }else{
+        done();
       }
-        if(action="cancel"){
-          done()
-        }
+       
     },
 
   },

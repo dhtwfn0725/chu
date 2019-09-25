@@ -14,7 +14,7 @@
       </router-link>
     </div>
     <div class="card-list">
-      <van-list :finished="finished" direction="down" @load="onLoad">
+      <van-list :finished="finished" v-model="loading" direction="down" @load="onLoad">
         <card-item
           v-for="(item,index) of list"
           :item="item"
@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     getList() {
-      console.log(this.loading);
       this.page++;
       let url = "/hot?page=" + this.page;
       this.axios.get(url).then(res => {
@@ -109,12 +108,10 @@ export default {
           return;
         }
         this.list = this.list.concat(res.data);
-
         this.loading = false;
       });
     },
     onLoad() {
-      this.loading = true;
       this.getList();
     },
     getCityList() {
