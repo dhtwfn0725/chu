@@ -18,7 +18,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-
+    getMy (context) {
+      context.commit('getMy')
+    }
   }
 })
 

@@ -31,12 +31,6 @@ Vue.prototype.axios = axios;
 Vue.use(Vant);
 
 Vue.use(Mint);
-
-axios.get('/my').then(res=>{
-  if(res.code == 0){
-      store.commit('setInfo',res.data);
-  }
-})
 new Vue({
   router,
   store,

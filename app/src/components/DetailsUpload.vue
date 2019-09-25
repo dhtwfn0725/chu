@@ -106,12 +106,11 @@ export default {
     }
   },
   created(){
-    this.axios.get('/my').then(res=>{
-        // 判断是否登录状态
-        if(res.code == 0){
-            this.isLogin = true
-        }
-      })
+
+    var res = sessionStorage.getItem('user');
+    if (res != null) {
+      this.isLogin = true
+    }
   }
 };
 </script>

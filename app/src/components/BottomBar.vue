@@ -142,20 +142,16 @@ export default {
     };
   },
   created() {
-
     this.getMy();
   },
   methods: {
     getMy() {
-      this.axios
-        .get("/my")
-        .then(res => {
-          if (res.code == 0) {
-            this.isLogin = true;
-            this.album = res.data.result;
-          }
-        })
-        .catch(err => {});
+      var my = sessionStorage.getItem('user');
+      if (my != null) {
+        my = JSON.parse(my);
+        this.isLogin = true;
+        this.album = my.result;
+      }
     },
     addAlbum() {
       this.showAdd = true;
@@ -227,7 +223,7 @@ export default {
         this.axios
           .post("/saveimg", qs.stringify({ cid, imgurls }))
           .then(response => {
-             Dialog({ message: '添加成功' });
+            Dialog({ message: "添加成功" });
           });
       });
     }

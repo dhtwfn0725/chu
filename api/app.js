@@ -16,6 +16,7 @@ const imglist = require('./routes/imglist');
 
 // 收藏路由
 const collection = require('./routes/collection');
+const changeCollection = require('./routes/changecollection');
 
 // 详情路由
 const attDetail = require('./routes/attDetail');
@@ -55,10 +56,11 @@ server.use("/user", loginRouter);
 server.use("/spotlist", spotList);
 server.use("/spotdetail", spotdetail);
 server.use("/search", search);
-server.use("/my", Auth, my);
+server.use("/my", Auth,my);
 server.use("/reg", reg);
 server.use("/imglist", imglist);
 server.use("/collection", Auth, collection);
+server.use("/changeCollection", Auth, changeCollection);
 server.use("/hot", hot);
 server.use("/city", city);
 server.use("/saveimg", Auth, saveImg);

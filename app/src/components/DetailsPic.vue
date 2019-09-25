@@ -4,7 +4,12 @@
       <h1>{{item.title}}</h1>
       <div class="collect">
         <span style="text-align: center;margin-right:20px;">景点等级:{{item.grade}}A级</span>
-        <van-button v-model="collectionNum" @click="change" :class="chge==false?'':'chge'" id="btn">收藏</van-button>
+        <van-button
+          v-model="collectionNum"
+          @click="change"
+          :class="chge==false?'':'chge'"
+          id="btn"
+        >{{text}}</van-button>
       </div>
     </div>
     <div class="mid-style">
@@ -14,7 +19,7 @@
         </div>
         <!-- <div class="item">
           <img src="/images/r2.jpg" />
-        </div> -->
+        </div>-->
         <div class="item num">
           <span>+{{commentNum}}</span>
         </div>
@@ -31,33 +36,70 @@
 </template>
 <script>
 export default {
-  props:{
-    item:{default:Object},
-    commentNum:{default:0}
+  props: {
+    item: { default: Object },
+    commentNum: { default: 0 }
   },
   data() {
     return {
       chge: false,
       num: 111,
-      collectionNum:0
+      collectionNum: 0,
+      text: "收藏",
+      act: "add",
+      user: null
     };
   },
-  methods: {
-    change() {
-      var btn = document.getElementById("btn");
-      if (this.chge) {
-        this.chge = false;
-        btn.innerHTML = "收藏";
-        commentNum.innerHTML--;
-      } else {
-        this.chge = true;
-        btn.innerHTML = "取消收藏";
-        commentNum.innerHTML++;
-      }
-      this.collectionNum = parseInt(commentNum.innerHTML);
-      console.log(this.collectionNum);
-    },
+  created() {
     
+  },
+  watch:{
+     item:function(){
+       this.init();
+     }
+  },
+  methods: {
+    init() {
+      var sid = this.item.id;
+      this.user = sessionStorage.getItem("user");
+
+      if (this.user != null) {
+        var { collect_list } = JSON.parse(this.user);
+
+        if (collect_list.indexOf(sid) != -1) {
+          this.chge = true;
+          this.text = "取消收藏";
+          this.act = "cancle";
+        }
+      }
+    },
+    change() {
+      if (this.user == null) {
+        this.$messagebox("消息", "亲，请先登录呢~");
+        return;
+      }
+      // 请求后端接口
+      var url = `/changeCollection?act=${this.act}&sid=${this.item.id}`;
+      this.axios.get(url).then(res => {
+        if (res.code == 0) {
+          this.$messagebox(res.msg);
+          if (this.act == "cancle") {
+            // 取消
+            this.chge = false;
+            this.text = "收藏";
+            this.act = "add";
+            this.item.collection_num--;
+          } else {
+            this.chge = true;
+            this.text = "取消收藏";
+            this.act = "cancle";
+            this.item.collection_num++;
+          }
+        } else {
+          this.$messagebox(res.msg);
+        }
+      });
+    }
   }
 };
 </script>
@@ -86,7 +128,7 @@ export default {
 }
 .mid-praise {
   display: flex;
-  width:60%;
+  width: 60%;
   border-top: 1px solid #d0cccc;
   text-align: center;
   align-items: center;

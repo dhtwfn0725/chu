@@ -8,7 +8,6 @@ import Router from 'vue-router'
 // import Collection from './views/Collection.vue'
 // import MyAlbum from './views/MyAlbum.vue'
 // import Register from './views/Reg.vue'
-
 Vue.use(Router)
 
 export default new Router({
